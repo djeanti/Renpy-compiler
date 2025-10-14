@@ -8,19 +8,21 @@ Renpy-Compiler is an ongoing project that implements a complete **AST constructi
 
 ## Features
 
-- **AST Construction**
-  - Parses Ren’Py-inspired scripts and builds a fully structured AST.
-  - Supports nodes such as `DefineNode`, `ImageNode`, `SceneNode`, `ShowNode`, `PlayNode`, `StringNode`, `LabelNode`, `ReturnNode`, `StopNode`, and more.
-  
-- **Semantic Analysis**
-  - Tracks variable declarations and usage.
-  - Validates proper usage of images, colors, transforms, layers, transitions, and audio.
-  - Ensures statements like `with` follow correct preceding statements (`scene`, `show`, `hide`, `play`).
+### 1. Tokenizer
+- Processes Ren’Py-style scripts and splits the code into meaningful tokens.
+- Identifies keywords, variables, strings, numbers, and built-in constructs.
+- Prepares the source code for parsing.
 
-- **Label & Context Handling**
-  - Separates top-level statements and label bodies.
-  - Maintains execution context for both global symbols and label-local symbols.
-  - Supports runtime-ready AST generation for sequential execution.
+### 2. Parser
+- Consumes the tokens to build syntactic structures.
+- Recognizes statements like `define`, `image`, `scene`, `show`, `play`, `stop`, `label`, `return`, and more.
+- Handles top-level statements and separates label bodies for sequential execution.
+
+### 3. AST Building (in the `parser` module)
+- Constructs a fully structured Abstract Syntax Tree (AST) representing the script.
+- Supports nodes such as `DefineNode`, `ImageNode`, `SceneNode`, `ShowNode`, `PlayNode`, `StringNode`, `LabelNode`, `ReturnNode`, `StopNode`, etc.
+- Tracks variable declarations, symbol usage, and context for semantic analysis.
+- Ensures statements like `with` follow correct preceding statements (`scene`, `show`, `hide`, `play`).
 
 ---
 
