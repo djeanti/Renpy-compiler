@@ -22,7 +22,6 @@ Renpy-Compiler is an ongoing project that implements a complete **AST constructi
 - Constructs a fully structured Abstract Syntax Tree (AST) representing the script.
 - Supports nodes such as `DefineNode`, `ImageNode`, `SceneNode`, `ShowNode`, `PlayNode`, `StringNode`, `LabelNode`, `ReturnNode`, `StopNode`, etc.
 - Tracks variable declarations, symbol usage, and context for semantic analysis.
-- Ensures statements like `with` follow correct preceding statements (`scene`, `show`, `hide`, `play`).
 
 ---
 
@@ -36,17 +35,6 @@ This project is **ongoing**. Current implementation includes:
 
 Future plans:
 
-- Complete runtime integration for executing visual novel scripts.
-- Advanced features such as conditional branching, loops, and more complex audio/visual effects.
+- Creation of the 'runtime engine' which will execute and create a visual novel video game from the complete AST object.
 
 ---
-
-## Usage
-
-The project is not yet fully ready for end-user execution, but the AST construction can be demonstrated with example Ren’Py scripts. The code is structured to allow easy extension towards a full runtime engine.
-
----
-
-## License
-
-This project is open-source and available under the MIT License.
