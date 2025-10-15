@@ -30,8 +30,8 @@ Renpy-Compiler is an ongoing project that implements a complete **AST(1) constru
 Currently it's possible to select a Ren’Py file and a parser method to test, generating the AST object for the Renpy file. 
 
 Please refer to the following documents to use this project:
-- INSTALL.MD : To install the required dependencies
-- Read the comments at the top of the file Test.py and modify as needed to test the desired parser method.
+- src/INSTALL.MD : To install the required dependencies
+- Read the comments at the top of the file src/Test.py and modify as needed to test the desired parser method.
   
 ## Project Status
 
