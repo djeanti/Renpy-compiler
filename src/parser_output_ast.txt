@@ -1,0 +1,93 @@
+Test #1: DefineNode(
+  id = UserNode(name='sceneu'),
+  value = 
+    FunctionCallNode(
+        name = 'Character',
+        args = [StringNode(value='"Eileen"')],
+        kwargs = [
+        ]
+    )
+)
+
+Test #2: DefineNode(
+  id = UserNode(name='narrator'),
+  value = 
+    FunctionCallNode(
+        name = 'Character',
+        args = [StringNode(value='"Narrator"')],
+        kwargs = [
+            AssignNode(
+                    LHS = KeywordNode(value='color'),
+                    RHS = StringNode(value="'#fff'")
+            ),
+            AssignNode(
+                    LHS = KeywordNode(value='image'),
+                    RHS = StringNode(value="'img.png'")
+            ),
+        ]
+    )
+)
+
+Test #3: DefineNode(
+  id = UserNode(name='name'),
+  value = 
+    StringNode(value='"Lucy"')
+)
+
+Test #4: DefineNode(
+  id = UserNode(name='title'),
+  value = 
+    StringNode(value='"The Journey"')
+)
+
+Test #5: DefineNode(
+  id = UserNode(name='main_character'),
+  value = 
+    UserNode(name='other_character')
+)
+
+Test #6: DefineNode(
+  id = UserNode(name='hero'),
+  value = 
+    FunctionCallNode(
+        name = 'Character',
+        args = [StringNode(value='"Alice"')],
+        kwargs = [
+        ]
+    )
+)
+
+Test #7: DefineNode(
+  id = UserNode(name='villain'),
+  value = 
+    FunctionCallNode(
+        name = 'Character',
+        args = [StringNode(value='"Bob"')],
+        kwargs = [
+        ]
+    )
+)
+
+Test #8: DefineNode(
+  id = UserNode(name='scene_name'),
+  value = 
+    UserNode(name='current_scene')
+)
+
+Test #9: DefineNode(
+  id = UserNode(name='welcome_message'),
+  value = 
+    StringNode(value='"Welcome"')
+)
+
+Test #10: DefineNode(
+  id = UserNode(name='player'),
+  value = 
+    FunctionCallNode(
+        name = 'Character',
+        args = [StringNode(value='"Hero"')],
+        kwargs = [
+        ]
+    )
+)
+
