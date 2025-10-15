@@ -4,8 +4,8 @@
 
 Renpy-Compiler is an ongoing project that implements a complete **AST(1) construction and semantic analysis** pipeline for a Ren’Py-inspired scripting language (RnP). The compiler parses `.rpy`-style scripts and generates an abstract syntax tree (AST) that can be used by a runtime engine to execute and render visual novels.
 
-(1) An AST (Abstract Syntax Tree) is a tree representation of the syntactic structure of source code, where each node corresponds to a construct in the language (e.g., DefineNode, LabelNode, SceneNode).
 ---
+(1) An AST (Abstract Syntax Tree) is a tree representation of the syntactic structure of source code, where each node corresponds to a construct in the language (e.g., DefineNode, LabelNode, SceneNode).
 
 ## Features
 
