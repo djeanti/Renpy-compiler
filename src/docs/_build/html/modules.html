@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src &mdash; Renpy Interpreter 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=cb975c41"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="AST module" href="AST.html" />
+    <link rel="prev" title="Renpy Interpreter documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Renpy Interpreter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AST.html">AST module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Error.html">Error module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html">Parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Test.html">Test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Textbox.html">Textbox module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tokens.html">Tokens module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conf.html">conf module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defs.html">defs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualnovel.html">visualnovel module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Renpy Interpreter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">src</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src">
+<h1>src<a class="headerlink" href="#src" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AST.html">AST module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.ASTNode"><code class="docutils literal notranslate"><span class="pre">ASTNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.AssignNode"><code class="docutils literal notranslate"><span class="pre">AssignNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.DefineNode"><code class="docutils literal notranslate"><span class="pre">DefineNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.DialogueNode"><code class="docutils literal notranslate"><span class="pre">DialogueNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.FunctionCallNode"><code class="docutils literal notranslate"><span class="pre">FunctionCallNode</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AST.html#AST.FunctionCallNode.get_character_name"><code class="docutils literal notranslate"><span class="pre">FunctionCallNode.get_character_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AST.html#AST.FunctionCallNode.get_user_tokens"><code class="docutils literal notranslate"><span class="pre">FunctionCallNode.get_user_tokens()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.HideNode"><code class="docutils literal notranslate"><span class="pre">HideNode</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AST.html#AST.HideNode.get_full_name"><code class="docutils literal notranslate"><span class="pre">HideNode.get_full_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.ImageNode"><code class="docutils literal notranslate"><span class="pre">ImageNode</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AST.html#AST.ImageNode.get_value"><code class="docutils literal notranslate"><span class="pre">ImageNode.get_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.JumpNode"><code class="docutils literal notranslate"><span class="pre">JumpNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.KeywordNode"><code class="docutils literal notranslate"><span class="pre">KeywordNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.LabelNode"><code class="docutils literal notranslate"><span class="pre">LabelNode</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AST.html#AST.LabelNode.get_next_label"><code class="docutils literal notranslate"><span class="pre">LabelNode.get_next_label()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.LayerNode"><code class="docutils literal notranslate"><span class="pre">LayerNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.MasterNode"><code class="docutils literal notranslate"><span class="pre">MasterNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.PlayNode"><code class="docutils literal notranslate"><span class="pre">PlayNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.ReturnNode"><code class="docutils literal notranslate"><span class="pre">ReturnNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.SceneNode"><code class="docutils literal notranslate"><span class="pre">SceneNode</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AST.html#AST.SceneNode.get_full_name"><code class="docutils literal notranslate"><span class="pre">SceneNode.get_full_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.ShowNode"><code class="docutils literal notranslate"><span class="pre">ShowNode</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AST.html#AST.ShowNode.get_full_name"><code class="docutils literal notranslate"><span class="pre">ShowNode.get_full_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.StopNode"><code class="docutils literal notranslate"><span class="pre">StopNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.StringNode"><code class="docutils literal notranslate"><span class="pre">StringNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.TransformNode"><code class="docutils literal notranslate"><span class="pre">TransformNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.TransitionNode"><code class="docutils literal notranslate"><span class="pre">TransitionNode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="AST.html#AST.UserNode"><code class="docutils literal notranslate"><span class="pre">UserNode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Error.html">Error module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Error.html#Error.DetailedError"><code class="docutils literal notranslate"><span class="pre">DetailedError</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Parser.html">Parser module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html#Parser.DispatchParser"><code class="docutils literal notranslate"><span class="pre">DispatchParser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.DispatchParser.parse_define"><code class="docutils literal notranslate"><span class="pre">DispatchParser.parse_define()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.DispatchParser.parse_image_expression"><code class="docutils literal notranslate"><span class="pre">DispatchParser.parse_image_expression()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.DispatchParser.parse_onlayer"><code class="docutils literal notranslate"><span class="pre">DispatchParser.parse_onlayer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.DispatchParser.parse_transform"><code class="docutils literal notranslate"><span class="pre">DispatchParser.parse_transform()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.DispatchParser.parse_with"><code class="docutils literal notranslate"><span class="pre">DispatchParser.parse_with()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.DispatchParser.update_args"><code class="docutils literal notranslate"><span class="pre">DispatchParser.update_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.DispatchParser.update_args_simpleparser"><code class="docutils literal notranslate"><span class="pre">DispatchParser.update_args_simpleparser()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html#Parser.HideParser"><code class="docutils literal notranslate"><span class="pre">HideParser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.HideParser.parse_hide"><code class="docutils literal notranslate"><span class="pre">HideParser.parse_hide()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html#Parser.LabelParser"><code class="docutils literal notranslate"><span class="pre">LabelParser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.LabelParser.check_body_token"><code class="docutils literal notranslate"><span class="pre">LabelParser.check_body_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.LabelParser.check_end_label"><code class="docutils literal notranslate"><span class="pre">LabelParser.check_end_label()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.LabelParser.parse_dialogue"><code class="docutils literal notranslate"><span class="pre">LabelParser.parse_dialogue()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.LabelParser.parse_label"><code class="docutils literal notranslate"><span class="pre">LabelParser.parse_label()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html#Parser.MasterParser"><code class="docutils literal notranslate"><span class="pre">MasterParser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.MasterParser.parse_renpy_file"><code class="docutils literal notranslate"><span class="pre">MasterParser.parse_renpy_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.MasterParser.parse_toplevel_statement"><code class="docutils literal notranslate"><span class="pre">MasterParser.parse_toplevel_statement()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html#Parser.RPParser"><code class="docutils literal notranslate"><span class="pre">RPParser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.RPParser.eat"><code class="docutils literal notranslate"><span class="pre">RPParser.eat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.RPParser.eat_optional"><code class="docutils literal notranslate"><span class="pre">RPParser.eat_optional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.RPParser.eat_skip_until"><code class="docutils literal notranslate"><span class="pre">RPParser.eat_skip_until()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.RPParser.skip_spaces"><code class="docutils literal notranslate"><span class="pre">RPParser.skip_spaces()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.RPParser.token_peek"><code class="docutils literal notranslate"><span class="pre">RPParser.token_peek()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.RPParser.vomit"><code class="docutils literal notranslate"><span class="pre">RPParser.vomit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html#Parser.SceneParser"><code class="docutils literal notranslate"><span class="pre">SceneParser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SceneParser.parse_scene"><code class="docutils literal notranslate"><span class="pre">SceneParser.parse_scene()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html#Parser.ShowParser"><code class="docutils literal notranslate"><span class="pre">ShowParser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.ShowParser.parse_show"><code class="docutils literal notranslate"><span class="pre">ShowParser.parse_show()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html#Parser.SimpleParser"><code class="docutils literal notranslate"><span class="pre">SimpleParser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.eof_line"><code class="docutils literal notranslate"><span class="pre">SimpleParser.eof_line()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_assign_global"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_assign_global()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_assign_local"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_assign_local()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_comment"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_comment()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_fadein"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_fadein()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_function_call"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_function_call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_image"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_jump"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_jump()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_play"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_play()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_return"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_return()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_stop"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_stop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_string"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Parser.html#Parser.SimpleParser.parse_user"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_user()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Test.html">Test module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Textbox.html">Textbox module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Textbox.html#Textbox.Gradient"><code class="docutils literal notranslate"><span class="pre">Gradient</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Textbox.html#Textbox.Gradient.create_vertical_gradient"><code class="docutils literal notranslate"><span class="pre">Gradient.create_vertical_gradient()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Textbox.html#Textbox.TextBox"><code class="docutils literal notranslate"><span class="pre">TextBox</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Textbox.html#Textbox.TextBox.complex_draw"><code class="docutils literal notranslate"><span class="pre">TextBox.complex_draw()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Textbox.html#Textbox.TextBox.draw"><code class="docutils literal notranslate"><span class="pre">TextBox.draw()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Textbox.html#Textbox.TextBox.resize"><code class="docutils literal notranslate"><span class="pre">TextBox.resize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Textbox.html#Textbox.is_rgba"><code class="docutils literal notranslate"><span class="pre">is_rgba()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Textbox.html#Textbox.scale_img"><code class="docutils literal notranslate"><span class="pre">scale_img()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Tokens.html">Tokens module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Tokens.html#Tokens.RPTokenizer"><code class="docutils literal notranslate"><span class="pre">RPTokenizer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Tokens.html#Tokens.RPTokenizer.char_is_token"><code class="docutils literal notranslate"><span class="pre">RPTokenizer.char_is_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tokens.html#Tokens.RPTokenizer.get_string_token"><code class="docutils literal notranslate"><span class="pre">RPTokenizer.get_string_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tokens.html#Tokens.RPTokenizer.get_token_comment"><code class="docutils literal notranslate"><span class="pre">RPTokenizer.get_token_comment()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tokens.html#Tokens.RPTokenizer.get_token_float"><code class="docutils literal notranslate"><span class="pre">RPTokenizer.get_token_float()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tokens.html#Tokens.RPTokenizer.tokenizer_from_file"><code class="docutils literal notranslate"><span class="pre">RPTokenizer.tokenizer_from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tokens.html#Tokens.RPTokenizer.word_is_token"><code class="docutils literal notranslate"><span class="pre">RPTokenizer.word_is_token()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="conf.html">conf module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defs.html">defs module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualnovel.html">visualnovel module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine"><code class="docutils literal notranslate"><span class="pre">StateMachine</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.break_img_object"><code class="docutils literal notranslate"><span class="pre">StateMachine.break_img_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.break_txt_object"><code class="docutils literal notranslate"><span class="pre">StateMachine.break_txt_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.clear_audio"><code class="docutils literal notranslate"><span class="pre">StateMachine.clear_audio()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.clear_layer"><code class="docutils literal notranslate"><span class="pre">StateMachine.clear_layer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.create_state_machine"><code class="docutils literal notranslate"><span class="pre">StateMachine.create_state_machine()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.display_state"><code class="docutils literal notranslate"><span class="pre">StateMachine.display_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.display_with_transition"><code class="docutils literal notranslate"><span class="pre">StateMachine.display_with_transition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.generate_VN"><code class="docutils literal notranslate"><span class="pre">StateMachine.generate_VN()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.get_dialogue_speaker"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_dialogue_speaker()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.get_label"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_label()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.get_labels_order"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_labels_order()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.get_nested_img"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_nested_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.get_position_from_size"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_position_from_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.get_scenenode_img"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_scenenode_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.get_user_value"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_user_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.handle_audio"><code class="docutils literal notranslate"><span class="pre">StateMachine.handle_audio()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.init_audio_dict"><code class="docutils literal notranslate"><span class="pre">StateMachine.init_audio_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.init_img_dict"><code class="docutils literal notranslate"><span class="pre">StateMachine.init_img_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.init_txt_dict"><code class="docutils literal notranslate"><span class="pre">StateMachine.init_txt_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.isolate_chainblock_state"><code class="docutils literal notranslate"><span class="pre">StateMachine.isolate_chainblock_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.load_audio"><code class="docutils literal notranslate"><span class="pre">StateMachine.load_audio()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.load_image"><code class="docutils literal notranslate"><span class="pre">StateMachine.load_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.pretty_dict"><code class="docutils literal notranslate"><span class="pre">StateMachine.pretty_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.pretty_list"><code class="docutils literal notranslate"><span class="pre">StateMachine.pretty_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.remove_img_obj"><code class="docutils literal notranslate"><span class="pre">StateMachine.remove_img_obj()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.remove_text_chainblock"><code class="docutils literal notranslate"><span class="pre">StateMachine.remove_text_chainblock()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.scale_image_to_wind"><code class="docutils literal notranslate"><span class="pre">StateMachine.scale_image_to_wind()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.StateMachine.search_tag_chainblock"><code class="docutils literal notranslate"><span class="pre">StateMachine.search_tag_chainblock()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.output_result"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.output_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.pretty_dict"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.pretty_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.print_list_token"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.print_list_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.step1_loadfile"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step1_loadfile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.step2_tokenizer"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step2_tokenizer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.step3_parser"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step3_parser()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.step4_initialize_master_node"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step4_initialize_master_node()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.step4_label_body_initialize"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step4_label_body_initialize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.step5_runtime"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step5_runtime()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.update_nested_table"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.update_nested_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.update_nested_table_image_node"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.update_nested_table_image_node()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="visualnovel.html#visualnovel.VisualNovelGenerator.verify_prior_declaration"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.verify_prior_declaration()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Renpy Interpreter documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="AST.html" class="btn btn-neutral float-right" title="AST module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David J.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

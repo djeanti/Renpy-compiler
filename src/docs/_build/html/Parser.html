@@ -1,0 +1,1117 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parser module &mdash; Renpy Interpreter 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=cb975c41"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Test module" href="Test.html" />
+    <link rel="prev" title="Error module" href="Error.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Renpy Interpreter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="AST.html">AST module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Error.html">Error module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Parser module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Parser.DispatchParser"><code class="docutils literal notranslate"><span class="pre">DispatchParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.DispatchParser.parse_define"><code class="docutils literal notranslate"><span class="pre">DispatchParser.parse_define()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.DispatchParser.parse_image_expression"><code class="docutils literal notranslate"><span class="pre">DispatchParser.parse_image_expression()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.DispatchParser.parse_onlayer"><code class="docutils literal notranslate"><span class="pre">DispatchParser.parse_onlayer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.DispatchParser.parse_transform"><code class="docutils literal notranslate"><span class="pre">DispatchParser.parse_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.DispatchParser.parse_with"><code class="docutils literal notranslate"><span class="pre">DispatchParser.parse_with()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.DispatchParser.update_args"><code class="docutils literal notranslate"><span class="pre">DispatchParser.update_args()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.DispatchParser.update_args_simpleparser"><code class="docutils literal notranslate"><span class="pre">DispatchParser.update_args_simpleparser()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Parser.HideParser"><code class="docutils literal notranslate"><span class="pre">HideParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.HideParser.parse_hide"><code class="docutils literal notranslate"><span class="pre">HideParser.parse_hide()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Parser.LabelParser"><code class="docutils literal notranslate"><span class="pre">LabelParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.LabelParser.check_body_token"><code class="docutils literal notranslate"><span class="pre">LabelParser.check_body_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.LabelParser.check_end_label"><code class="docutils literal notranslate"><span class="pre">LabelParser.check_end_label()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.LabelParser.parse_dialogue"><code class="docutils literal notranslate"><span class="pre">LabelParser.parse_dialogue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.LabelParser.parse_label"><code class="docutils literal notranslate"><span class="pre">LabelParser.parse_label()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Parser.MasterParser"><code class="docutils literal notranslate"><span class="pre">MasterParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.MasterParser.parse_renpy_file"><code class="docutils literal notranslate"><span class="pre">MasterParser.parse_renpy_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.MasterParser.parse_toplevel_statement"><code class="docutils literal notranslate"><span class="pre">MasterParser.parse_toplevel_statement()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Parser.RPParser"><code class="docutils literal notranslate"><span class="pre">RPParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.RPParser.eat"><code class="docutils literal notranslate"><span class="pre">RPParser.eat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.RPParser.eat_optional"><code class="docutils literal notranslate"><span class="pre">RPParser.eat_optional()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.RPParser.eat_skip_until"><code class="docutils literal notranslate"><span class="pre">RPParser.eat_skip_until()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.RPParser.skip_spaces"><code class="docutils literal notranslate"><span class="pre">RPParser.skip_spaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.RPParser.token_peek"><code class="docutils literal notranslate"><span class="pre">RPParser.token_peek()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.RPParser.vomit"><code class="docutils literal notranslate"><span class="pre">RPParser.vomit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Parser.SceneParser"><code class="docutils literal notranslate"><span class="pre">SceneParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SceneParser.parse_scene"><code class="docutils literal notranslate"><span class="pre">SceneParser.parse_scene()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Parser.ShowParser"><code class="docutils literal notranslate"><span class="pre">ShowParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.ShowParser.parse_show"><code class="docutils literal notranslate"><span class="pre">ShowParser.parse_show()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Parser.SimpleParser"><code class="docutils literal notranslate"><span class="pre">SimpleParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.eof_line"><code class="docutils literal notranslate"><span class="pre">SimpleParser.eof_line()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_assign_global"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_assign_global()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_assign_local"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_assign_local()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_comment"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_comment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_fadein"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_fadein()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_function_call"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_function_call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_image"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_jump"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_jump()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_play"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_play()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_return"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_return()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_stop"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_string"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Parser.SimpleParser.parse_user"><code class="docutils literal notranslate"><span class="pre">SimpleParser.parse_user()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Test.html">Test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Textbox.html">Textbox module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tokens.html">Tokens module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conf.html">conf module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defs.html">defs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualnovel.html">visualnovel module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Renpy Interpreter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+      <li class="breadcrumb-item active">Parser module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Parser.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-Parser">
+<span id="parser-module"></span><h1>Parser module<a class="headerlink" href="#module-Parser" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="Parser.DispatchParser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Parser.</span></span><span class="sig-name descname"><span class="pre">DispatchParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tokens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#DispatchParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.DispatchParser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Parser.SimpleParser" title="Parser.SimpleParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleParser</span></code></a></p>
+<p>Parser class using dispatch tables to handle more complex parser methods.</p>
+<p>DispatchParser implements a recursive dispatch table system for parsing Ren’Py-style syntax.
+Children dispatch parsers handle a keyword or token type, optionally take an ‘args’ dictionary, 
+perform parsing, and update ‘args’ before returning it to the parent parser.
+Parent dispatch parsers handle top-level constructs and return fully-formed AST nodes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.DispatchParser.parse_define">
+<span class="sig-name descname"><span class="pre">parse_define</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#DispatchParser.parse_define"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.DispatchParser.parse_define" title="Link to this definition"></a></dt>
+<dd><section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Parses a <cite>define</cite> statement of the form <cite>define &lt;USER&gt; = &lt;expression&gt;</cite>.  
+The right-hand side <cite>&lt;expression&gt;</cite> can be:
+- A STRING (e.g., <cite>“Eileen”</cite>)
+- A USER (variable, e.g., <cite>True</cite>, <cite>None</cite>, <cite>my_var</cite>)
+- A FUNCTION call (e.g., <cite>Character(“Eileen”, color=”#fff”)</cite>)</p>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>DefineNode</dt><dd><p>AST node representing the <cite>define</cite> statement, containing:
+- <cite>id</cite>: the user-defined identifier
+- <cite>value</cite>: the parsed expression on the right-hand side</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.DispatchParser.parse_image_expression">
+<span class="sig-name descname"><span class="pre">parse_image_expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#DispatchParser.parse_image_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.DispatchParser.parse_image_expression" title="Link to this definition"></a></dt>
+<dd><section id="id1">
+<h2>Description<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>Parses an image expression in a scene statement.  
+The possible syntax is:</p>
+<blockquote>
+<div><p>scene &lt;image_expression&gt; [at &lt;transform&gt;] [onlayer &lt;layer&gt;] [with &lt;transition&gt;]</p>
+</div></blockquote>
+<p>Where:
+- <cite>&lt;image_expression&gt;</cite> is one or more USER tokens representing the image or variable
+- <cite>&lt;transform&gt;</cite> is a transform (parsed via <cite>parse_transform</cite>)
+- <cite>&lt;layer&gt;</cite> is a layer (parsed via <cite>parse_onlayer</cite>)
+- <cite>&lt;transition&gt;</cite> is a transition (parsed via <cite>parse_with</cite>)</p>
+<p>The method handles all relevant dispatch keywords: <cite>at</cite>, <cite>onlayer</cite>, <cite>with</cite>.</p>
+</section>
+<section id="id2">
+<h2>Arguments<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>args: dict</dt><dd><p>Dictionary of arguments to update. Parsed components are stored under:
+- <cite>‘image_expression’</cite>: list of parsed USER tokens
+- <cite>‘transform’</cite>, <cite>‘layer’</cite>, <cite>‘transition’</cite>: optional, depending on clauses present</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h2>Returns<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>dict</dt><dd><p>The updated <cite>args</cite> dictionary containing the parsed image expression and any optional clauses.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.DispatchParser.parse_onlayer">
+<span class="sig-name descname"><span class="pre">parse_onlayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#DispatchParser.parse_onlayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.DispatchParser.parse_onlayer" title="Link to this definition"></a></dt>
+<dd><section id="id4">
+<h2>Description<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>Parses an <cite>onlayer</cite> statement, which assigns a layer to an element and optionally handles a transition.  
+The syntax handled is:</p>
+<blockquote>
+<div><p>onlayer &lt;layer&gt;
+onlayer &lt;layer&gt; with &lt;transition&gt;</p>
+</div></blockquote>
+<p>Where <cite>&lt;layer&gt;</cite> can be:
+- The BUILTIN layer <cite>‘master’</cite>
+- A USER-defined layer identifier</p>
+<p>The method also optionally handles a <cite>with</cite> clause to specify a transition using a dispatch table.</p>
+</section>
+<section id="id5">
+<h2>Arguments<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>args: dict</dt><dd><p>Dictionary of arguments to update. The parsed layer is stored under the key <cite>‘layer’</cite>.  
+If a <cite>with</cite> transition is present, it will also be added under the key <cite>‘transition’</cite>.</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h2>Returns<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>dict</dt><dd><p>The updated <cite>args</cite> dictionary containing:
+- <cite>‘layer’</cite>: the parsed <cite>LayerNode</cite>
+- <cite>‘transition’</cite> (optional): the parsed <cite>TransitionNode</cite> if a <cite>with</cite> clause was present</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.DispatchParser.parse_transform">
+<span class="sig-name descname"><span class="pre">parse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#DispatchParser.parse_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.DispatchParser.parse_transform" title="Link to this definition"></a></dt>
+<dd><section id="id7">
+<h2>Description<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>Parses a <cite>transform</cite> statement that specifies a positioning or transformation for a scene element.  
+The syntax handled includes:</p>
+<blockquote>
+<div><p>scene &lt;image_expression&gt; at &lt;transform&gt;
+scene &lt;image_expression&gt; at &lt;transform&gt; with &lt;transition&gt;
+scene &lt;image_expression&gt; at &lt;transform&gt; onlayer &lt;layer&gt; [with &lt;transition&gt;]</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Where <cite>&lt;transform&gt;</cite> can be one of the following BUILTIN values:</dt><dd><p>‘center’, ‘left’, ‘right’, ‘top’, ‘bottom’, ‘offscreenleft’, ‘offscreenright’,
+‘topleft’, ‘topright’, ‘bottomleft’, ‘bottomright’</p>
+</dd>
+</dl>
+<p>The method also optionally handles <cite>with</cite> or <cite>onlayer</cite> clauses using a dispatch table.</p>
+</section>
+<section id="id8">
+<h2>Arguments<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>args: dict</dt><dd><p>Dictionary of arguments to update. The parsed transform is stored under the key <cite>‘transform’</cite>.  
+Additional keys such as <cite>‘layer’</cite> or <cite>‘transition’</cite> may be added if corresponding clauses are present.</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h2>Returns<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>dict</dt><dd><p>The updated <cite>args</cite> dictionary containing:
+- <cite>‘transform’</cite>: the parsed <cite>TransformNode</cite>
+- <cite>‘layer’</cite> (optional): if an <cite>onlayer</cite> clause was present
+- <cite>‘transition’</cite> (optional): if a <cite>with</cite> clause was present</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.DispatchParser.parse_with">
+<span class="sig-name descname"><span class="pre">parse_with</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#DispatchParser.parse_with"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.DispatchParser.parse_with" title="Link to this definition"></a></dt>
+<dd><section id="id10">
+<h2>Description<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>Parses a <cite>with</cite> statement that specifies a transition.  
+The syntax handled is:</p>
+<blockquote>
+<div><p>with &lt;transition&gt;</p>
+</div></blockquote>
+<p>Where <cite>&lt;transition&gt;</cite> can be:
+- A BUILTIN token (predefined transition)
+- A USER-defined identifier</p>
+</section>
+<section id="id11">
+<h2>Arguments<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>args: dict, optional</dt><dd><p>Dictionary to update with the parsed transition under the key <cite>‘transition’</cite>.  
+If not provided, the method returns only the parsed transition AST node.</p>
+</dd>
+</dl>
+</section>
+<section id="id12">
+<h2>Returns<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>TransitionNode or dict</dt><dd><ul class="simple">
+<li><p>If <cite>args</cite> is provided: the updated <cite>args</cite> dictionary containing the parsed transition.</p></li>
+<li><p>If <cite>args</cite> is None: the <cite>TransitionNode</cite> representing the parsed transition.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.DispatchParser.update_args">
+<span class="sig-name descname"><span class="pre">update_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">syntax_handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#DispatchParser.update_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.DispatchParser.update_args" title="Link to this definition"></a></dt>
+<dd><section id="id13">
+<h2>Description<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<p>Updates the <cite>args</cite> dictionary by invoking the parser method retrieved from <cite>syntax_handler</cite>.  
+The method distinguishes between two types of parser methods:
+- If the parser method is bound to <cite>SimpleParser</cite>, it is called without arguments and its result is stored in <cite>args</cite> under the given key.
+- If the parser method is a <cite>DispatchParser</cite>, it is called with <cite>args</cite> and expected to return an updated dictionary.
+- Raises a <cite>DetailedError</cite> if the parser method is neither type.</p>
+</section>
+<section id="id14">
+<h2>Arguments<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>syntax_handler: dict</dt><dd><p>Dispatch table mapping token types or values to parser methods.</p>
+</dd>
+<dt>args: dict</dt><dd><p>The current dictionary of arguments to update.</p>
+</dd>
+<dt>key: str, optional</dt><dd><p>The key under which to store the result when calling a <cite>SimpleParser</cite> method. Default is an empty string.</p>
+</dd>
+</dl>
+</section>
+<section id="id15">
+<h2>Returns<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>dict</dt><dd><p>The updated <cite>args</cite> dictionary.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.DispatchParser.update_args_simpleparser">
+<span class="sig-name descname"><span class="pre">update_args_simpleparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">syntax_handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_with_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#DispatchParser.update_args_simpleparser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.DispatchParser.update_args_simpleparser" title="Link to this definition"></a></dt>
+<dd><section id="id16">
+<h2>Description<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<p>Updates the <cite>args</cite> dictionary by calling a <cite>SimpleParser</cite> method retrieved from <cite>syntax_handler</cite>.  
+Typically used by dispatch parser methods that expect only <cite>SimpleParser</cite> methods in their syntax handler.</p>
+</section>
+<section id="id17">
+<h2>Arguments<a class="headerlink" href="#id17" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>syntax_handler: dict</dt><dd><p>Dispatch table mapping token types or values to parser methods.</p>
+</dd>
+<dt>args: dict</dt><dd><p>The current dictionary of arguments to update.</p>
+</dd>
+<dt>key: str, optional</dt><dd><p>The key under which to store the result of the <cite>SimpleParser</cite> method. Default is an empty string.</p>
+</dd>
+<dt>check_with_type: bool, optional</dt><dd><p>If True, <cite>_get_parser</cite> will prioritize matching the token type when selecting the parser method. Default is False.</p>
+</dd>
+</dl>
+</section>
+<section id="id18">
+<h2>Returns<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>dict</dt><dd><p>The updated <cite>args</cite> dictionary.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Parser.HideParser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Parser.</span></span><span class="sig-name descname"><span class="pre">HideParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tokens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#HideParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.HideParser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Parser.DispatchParser" title="Parser.DispatchParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">DispatchParser</span></code></a></p>
+<p>Specific class to handler hide keyword with dispatch tables (parent handler)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.HideParser.parse_hide">
+<span class="sig-name descname"><span class="pre">parse_hide</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#HideParser.parse_hide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.HideParser.parse_hide" title="Link to this definition"></a></dt>
+<dd><section id="id19">
+<h2>Description<a class="headerlink" href="#id19" title="Link to this heading"></a></h2>
+<p>Parses a <cite>hide</cite> statement, handling multiple syntactic variations through recursive dispatch tables.  
+The possible syntax is:</p>
+<blockquote>
+<div><p>hide [&lt;image_expression&gt;] [onlayer &lt;layer&gt;] [with &lt;transition&gt;]</p>
+</div></blockquote>
+<p>Where:
+- <cite>&lt;image_expression&gt;</cite>: one or more USER tokens representing the image or variable
+- <cite>&lt;layer&gt;</cite>: a layer (parsed via <cite>parse_onlayer</cite>)
+- <cite>&lt;transition&gt;</cite>: a transition (parsed via <cite>parse_with</cite>)</p>
+<p>This method handles the initial cases (<cite>hide</cite> alone or followed by <cite>image_expression</cite>, <cite>with</cite>, or <cite>onlayer</cite>) and delegates more complex clauses to the appropriate parser methods via dispatch tables.</p>
+</section>
+<section id="id20">
+<h2>Arguments<a class="headerlink" href="#id20" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id21">
+<h2>Returns<a class="headerlink" href="#id21" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>HideNode</dt><dd><p>AST node representing the parsed hide statement, containing optional fields:
+- <cite>image_expression</cite>: list of USER tokens or None
+- <cite>layer</cite>: parsed <cite>LayerNode</cite> or None
+- <cite>transition</cite>: parsed <cite>TransitionNode</cite> or None</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Parser.LabelParser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Parser.</span></span><span class="sig-name descname"><span class="pre">LabelParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tokens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#LabelParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.LabelParser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Parser.SceneParser" title="Parser.SceneParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">SceneParser</span></code></a>, <a class="reference internal" href="#Parser.ShowParser" title="Parser.ShowParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShowParser</span></code></a>, <a class="reference internal" href="#Parser.HideParser" title="Parser.HideParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">HideParser</span></code></a></p>
+<p>Specific class to handler label keyword with dispatch tables (parent handler)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.LabelParser.check_body_token">
+<span class="sig-name descname"><span class="pre">check_body_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#LabelParser.check_body_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.LabelParser.check_body_token" title="Link to this definition"></a></dt>
+<dd><section id="id22">
+<h2>Description<a class="headerlink" href="#id22" title="Link to this heading"></a></h2>
+<p>Checks the next token at the beginning of a line inside a label body and dispatches to the appropriate parser method.  
+Acceptable tokens include: <cite>scene</cite>, <cite>show</cite>, <cite>hide</cite>, <cite>play</cite>, <cite>stop</cite>, <cite>with</cite>, <cite>jump</cite>, <cite>return</cite>, <cite>STRING</cite>, <cite>COMMENT</cite>, <cite>USER</cite>.</p>
+</section>
+<section id="id23">
+<h2>Arguments<a class="headerlink" href="#id23" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id24">
+<h2>Returns<a class="headerlink" href="#id24" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>ASTNode</dt><dd><p>The AST node returned by the corresponding parser method for the current token.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.LabelParser.check_end_label">
+<span class="sig-name descname"><span class="pre">check_end_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">INDENTATION</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#LabelParser.check_end_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.LabelParser.check_end_label" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.LabelParser.parse_dialogue">
+<span class="sig-name descname"><span class="pre">parse_dialogue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#LabelParser.parse_dialogue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.LabelParser.parse_dialogue" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.LabelParser.parse_label">
+<span class="sig-name descname"><span class="pre">parse_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#LabelParser.parse_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.LabelParser.parse_label" title="Link to this definition"></a></dt>
+<dd><section id="id25">
+<h2>Description<a class="headerlink" href="#id25" title="Link to this heading"></a></h2>
+<p>Parses a label definition and its body.  
+The syntax handled is:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>label &lt;label_name&gt;:</dt><dd><p>&lt;body_statements&gt;
+return|jump</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Where <cite>&lt;body_statements&gt;</cite> can include any valid tokens parsed by <cite>check_body_token</cite> (scene, show, hide, play, etc.).  
+The method enforces consistent indentation for all lines in the label body.  
+The label must end with a <cite>return</cite> or <cite>jump</cite> statement.</p>
+</section>
+<section id="id26">
+<h2>Arguments<a class="headerlink" href="#id26" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id27">
+<h2>Returns<a class="headerlink" href="#id27" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>LabelNode</dt><dd><p>AST node representing the parsed label, containing:
+- <cite>label</cite>: the name of the label
+- <cite>body</cite>: a list of AST nodes representing the statements inside the label</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Parser.MasterParser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Parser.</span></span><span class="sig-name descname"><span class="pre">MasterParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tokens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#MasterParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.MasterParser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Parser.LabelParser" title="Parser.LabelParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">LabelParser</span></code></a></p>
+<p>Class that create the final AST tree object for the game</p>
+<p>Tips:
+A renpy file in this project is considered to be structured by labels and top-level lines.
+We call Top-level lines statements written outside of any label such as <cite>define</cite>, <cite>image</cite>, 
+<cite>play</cite>.
+# They must appear before any label that uses them. Lines between labels
+# are only available to labels defined after them. Lines after all labels
+# are valid but unused if no label references them.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.MasterParser.parse_renpy_file">
+<span class="sig-name descname"><span class="pre">parse_renpy_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#MasterParser.parse_renpy_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.MasterParser.parse_renpy_file" title="Link to this definition"></a></dt>
+<dd><p>Structure of AST:
+List according to order you read renpy file.
+Linkage resolution not done here.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.MasterParser.parse_toplevel_statement">
+<span class="sig-name descname"><span class="pre">parse_toplevel_statement</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#MasterParser.parse_toplevel_statement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.MasterParser.parse_toplevel_statement" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Parser.RPParser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Parser.</span></span><span class="sig-name descname"><span class="pre">RPParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tokens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#RPParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.RPParser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class providing TOOL methods for all parser classes.</p>
+<p>TOOL methods are general utilities used by every parser
+methods defined in class that inherits this one.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.RPParser.eat">
+<span class="sig-name descname"><span class="pre">eat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expected_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#RPParser.eat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.RPParser.eat" title="Link to this definition"></a></dt>
+<dd><section id="id28">
+<h2>Description<a class="headerlink" href="#id28" title="Link to this heading"></a></h2>
+<p>Consume the next token, optionally verifying its type and value.</p>
+</section>
+<section id="id29">
+<h2>Arguments<a class="headerlink" href="#id29" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>expected_type<span class="classifier">str, optional</span></dt><dd><p>Type of the expected token. If empty string (“”), type check is skipped.</p>
+</dd>
+<dt>expected_value<span class="classifier">str, optional</span></dt><dd><p>Expected value of the token. If empty string (“”), value check is skipped.</p>
+</dd>
+</dl>
+</section>
+<section id="id30">
+<h2>Returns<a class="headerlink" href="#id30" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>str</dt><dd><p>The consumed token.</p>
+</dd>
+</dl>
+</section>
+<section id="raises">
+<h2>Raises<a class="headerlink" href="#raises" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>DetailedError</dt><dd><p>If the token type or value does not match expectations.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.RPParser.eat_optional">
+<span class="sig-name descname"><span class="pre">eat_optional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expected_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#RPParser.eat_optional"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.RPParser.eat_optional" title="Link to this definition"></a></dt>
+<dd><section id="id31">
+<h2>Description<a class="headerlink" href="#id31" title="Link to this heading"></a></h2>
+<p>Consume the next token if it matches expected_type; otherwise, skip.
+Syntax enforcement: optional, does not raise errors if token missing.</p>
+</section>
+<section id="id32">
+<h2>Arguments<a class="headerlink" href="#id32" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>expected_type<span class="classifier">str</span></dt><dd><p>The type of token that is optional.</p>
+</dd>
+</dl>
+</section>
+<section id="id33">
+<h2>Returns<a class="headerlink" href="#id33" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>str or bool</dt><dd><p>The consumed token if present, False if token was skipped.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.RPParser.eat_skip_until">
+<span class="sig-name descname"><span class="pre">eat_skip_until</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expected_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type_found</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#RPParser.eat_skip_until"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.RPParser.eat_skip_until" title="Link to this definition"></a></dt>
+<dd><section id="id34">
+<h2>Description<a class="headerlink" href="#id34" title="Link to this heading"></a></h2>
+<p>Advance through tokens until <cite>expected_type</cite> is found.</p>
+</section>
+<section id="id35">
+<h2>Arguments<a class="headerlink" href="#id35" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>expected_type<span class="classifier">str</span></dt><dd><p>The type of token to look for.</p>
+</dd>
+<dt>return_type_found [optional]<span class="classifier">bool</span></dt><dd><p>If True, return the token type found.</p>
+</dd>
+</dl>
+</section>
+<section id="id36">
+<h2>Returns<a class="headerlink" href="#id36" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>bool or str</dt><dd><p>If return_type_found is False: True if <cite>expected_type</cite> found, False otherwise.
+If return_type_found is True: token type found, whether it matches <cite>expected_type</cite> or not.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.RPParser.skip_spaces">
+<span class="sig-name descname"><span class="pre">skip_spaces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#RPParser.skip_spaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.RPParser.skip_spaces" title="Link to this definition"></a></dt>
+<dd><section id="id37">
+<h2>Description<a class="headerlink" href="#id37" title="Link to this heading"></a></h2>
+<p>Consume all consecutive SPACE tokens.
+Syntax enforcement: optional, does not raise errors if no SPACE tokens.</p>
+</section>
+<section id="id38">
+<h2>Arguments<a class="headerlink" href="#id38" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id39">
+<h2>Returns<a class="headerlink" href="#id39" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.RPParser.token_peek">
+<span class="sig-name descname"><span class="pre">token_peek</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#RPParser.token_peek"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.RPParser.token_peek" title="Link to this definition"></a></dt>
+<dd><section id="id40">
+<h2>Description<a class="headerlink" href="#id40" title="Link to this heading"></a></h2>
+<p>Look at the next token without advancing the index.</p>
+</section>
+<section id="id41">
+<h2>Arguments<a class="headerlink" href="#id41" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>return_type<span class="classifier">bool, optional</span></dt><dd><p>If True (default), return the token type.
+If False, return the full token.</p>
+</dd>
+</dl>
+</section>
+<section id="id42">
+<h2>Returns<a class="headerlink" href="#id42" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>str</dt><dd><p>Token type if return_type is True, else the full token string.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.RPParser.vomit">
+<span class="sig-name descname"><span class="pre">vomit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expected_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#RPParser.vomit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.RPParser.vomit" title="Link to this definition"></a></dt>
+<dd><section id="id43">
+<h2>Description<a class="headerlink" href="#id43" title="Link to this heading"></a></h2>
+<p>Safely move the index backward if the current token does not match expected_type.
+Used to “unconsume” a token.</p>
+</section>
+<section id="id44">
+<h2>Arguments<a class="headerlink" href="#id44" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>expected_type<span class="classifier">str or list</span></dt><dd><p>A single token type or a list of allowed token types.</p>
+</dd>
+</dl>
+</section>
+<section id="id45">
+<h2>Returns<a class="headerlink" href="#id45" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if current token matches expected_type, False if index was decremented.</p>
+</dd>
+</dl>
+</section>
+<section id="id46">
+<h2>Raises<a class="headerlink" href="#id46" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>DetailedError</dt><dd><p>If argument type is invalid or index is out of range.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Parser.SceneParser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Parser.</span></span><span class="sig-name descname"><span class="pre">SceneParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tokens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SceneParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SceneParser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Parser.DispatchParser" title="Parser.DispatchParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">DispatchParser</span></code></a></p>
+<p>Specific class to handle scene keyword with dispatch table (parent parser)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SceneParser.parse_scene">
+<span class="sig-name descname"><span class="pre">parse_scene</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SceneParser.parse_scene"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SceneParser.parse_scene" title="Link to this definition"></a></dt>
+<dd><section id="id47">
+<h2>Description<a class="headerlink" href="#id47" title="Link to this heading"></a></h2>
+<p>Parses a <cite>scene</cite> statement, handling multiple syntactic variations through recursive dispatch tables.  
+The possible syntax is:</p>
+<blockquote>
+<div><p>scene [&lt;image_expression&gt;] [at &lt;transform&gt;] [onlayer &lt;layer&gt;] [with &lt;transition&gt;]</p>
+</div></blockquote>
+<p>Where:
+- <cite>&lt;image_expression&gt;</cite>: one or more USER tokens representing the image or variable
+- <cite>&lt;transform&gt;</cite>: a transform (parsed via <cite>parse_transform</cite>)
+- <cite>&lt;layer&gt;</cite>: a layer (parsed via <cite>parse_onlayer</cite>)
+- <cite>&lt;transition&gt;</cite>: a transition (parsed via <cite>parse_with</cite>)</p>
+<p>This method handles the initial cases (scene alone or followed by <cite>image_expression</cite>, <cite>with</cite>, or <cite>onlayer</cite>) and delegates more complex clauses to appropriate parser methods via dispatch tables.</p>
+</section>
+<section id="id48">
+<h2>Arguments<a class="headerlink" href="#id48" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id49">
+<h2>Returns<a class="headerlink" href="#id49" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>SceneNode</dt><dd><p>AST node representing the parsed scene, containing optional fields:
+- <cite>image_expression</cite>: list of USER tokens or None
+- <cite>transform</cite>: parsed <cite>TransformNode</cite> or None
+- <cite>layer</cite>: parsed <cite>LayerNode</cite> or None
+- <cite>transition</cite>: parsed <cite>TransitionNode</cite> or None</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Parser.ShowParser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Parser.</span></span><span class="sig-name descname"><span class="pre">ShowParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tokens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#ShowParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.ShowParser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Parser.DispatchParser" title="Parser.DispatchParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">DispatchParser</span></code></a></p>
+<p>Specific class to handler show keyword with dispatch tables (parent handler)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.ShowParser.parse_show">
+<span class="sig-name descname"><span class="pre">parse_show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#ShowParser.parse_show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.ShowParser.parse_show" title="Link to this definition"></a></dt>
+<dd><section id="id50">
+<h2>Description<a class="headerlink" href="#id50" title="Link to this heading"></a></h2>
+<p>Parses a <cite>show</cite> statement, handling multiple syntactic variations through recursive dispatch tables.  
+The possible syntax is:</p>
+<blockquote>
+<div><p>show [&lt;image_expression&gt;] [at &lt;transform&gt;] [onlayer &lt;layer&gt;] [with &lt;transition&gt;]</p>
+</div></blockquote>
+<p>Where:
+- <cite>&lt;image_expression&gt;</cite>: one or more USER tokens representing the image or variable
+- <cite>&lt;transform&gt;</cite>: a transform (parsed via <cite>parse_transform</cite>)
+- <cite>&lt;layer&gt;</cite>: a layer (parsed via <cite>parse_onlayer</cite>)
+- <cite>&lt;transition&gt;</cite>: a transition (parsed via <cite>parse_with</cite>)</p>
+<p>This method handles the initial cases (<cite>show</cite> alone or followed by <cite>image_expression</cite>, <cite>with</cite>, or <cite>onlayer</cite>) and delegates more complex clauses to the appropriate parser methods via dispatch tables.</p>
+</section>
+<section id="id51">
+<h2>Arguments<a class="headerlink" href="#id51" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id52">
+<h2>Returns<a class="headerlink" href="#id52" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>ShowNode</dt><dd><p>AST node representing the parsed show statement, containing optional fields:
+- <cite>image_expression</cite>: list of USER tokens or None
+- <cite>transform</cite>: parsed <cite>TransformNode</cite> or None
+- <cite>layer</cite>: parsed <cite>LayerNode</cite> or None
+- <cite>transition</cite>: parsed <cite>TransitionNode</cite> or None</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Parser.SimpleParser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Parser.</span></span><span class="sig-name descname"><span class="pre">SimpleParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tokens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Parser.RPParser" title="Parser.RPParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">RPParser</span></code></a></p>
+<p>Provides simple parsing methods for parsing without a dispatch table.
+This class inherits all the TOOLS from RPParser</p>
+<p>These methods implement fundamental parsing logic. They serve as the base for
+more complex parsers.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.eof_line">
+<span class="sig-name descname"><span class="pre">eof_line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.eof_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.eof_line" title="Link to this definition"></a></dt>
+<dd><section id="id53">
+<h2>Description<a class="headerlink" href="#id53" title="Link to this heading"></a></h2>
+<p>Handle the end of a line after reading a statement.
+Syntax enforcement: Raises DetailedError for unexpected tokens.</p>
+</section>
+<section id="id54">
+<h2>Arguments<a class="headerlink" href="#id54" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id55">
+<h2>Returns<a class="headerlink" href="#id55" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_assign_global">
+<span class="sig-name descname"><span class="pre">parse_assign_global</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_assign_global"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_assign_global" title="Link to this definition"></a></dt>
+<dd><section id="id56">
+<h2>Description<a class="headerlink" href="#id56" title="Link to this heading"></a></h2>
+<p>Parse a ‘global assignment’ statement.
+Syntax: global &lt;identifier&gt; = &lt;expression&gt;
+Syntax enforcement: Raises DetailedError if identifier or expression is missing.</p>
+</section>
+<section id="id57">
+<h2>Arguments<a class="headerlink" href="#id57" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id58">
+<h2>Returns<a class="headerlink" href="#id58" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>AssignGlobalNode</dt><dd><p>AST node representing a global variable assignment.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_assign_local">
+<span class="sig-name descname"><span class="pre">parse_assign_local</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_assign_local"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_assign_local" title="Link to this definition"></a></dt>
+<dd><section id="id59">
+<h2>Description<a class="headerlink" href="#id59" title="Link to this heading"></a></h2>
+<p>Parse a ‘local assignment’ statement.
+Syntax: &lt;identifier&gt; = &lt;expression&gt;
+Syntax enforcement: Raises DetailedError if identifier or expression is missing.</p>
+</section>
+<section id="id60">
+<h2>Arguments<a class="headerlink" href="#id60" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id61">
+<h2>Returns<a class="headerlink" href="#id61" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>AssignLocalNode</dt><dd><p>AST node representing a local variable assignment.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_comment">
+<span class="sig-name descname"><span class="pre">parse_comment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_comment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_comment" title="Link to this definition"></a></dt>
+<dd><section id="id62">
+<h2>Description<a class="headerlink" href="#id62" title="Link to this heading"></a></h2>
+<p>Consume a comment line. Consume everything until NEWLINE token or end of token list (self.EOF).
+Syntax enforcement: Optional, does not raise errors for comment content.</p>
+</section>
+<section id="id63">
+<h2>Arguments<a class="headerlink" href="#id63" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id64">
+<h2>Returns<a class="headerlink" href="#id64" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_fadein">
+<span class="sig-name descname"><span class="pre">parse_fadein</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_fadein"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_fadein" title="Link to this definition"></a></dt>
+<dd><section id="id65">
+<h2>Description<a class="headerlink" href="#id65" title="Link to this heading"></a></h2>
+<p>Parse a ‘fadein’ statement.
+Syntax: fadein &lt;duration&gt;
+Syntax enforcement: Raises DetailedError if duration is missing or invalid.</p>
+</section>
+<section id="id66">
+<h2>Arguments<a class="headerlink" href="#id66" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id67">
+<h2>Returns<a class="headerlink" href="#id67" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>FadeInNode</dt><dd><p>AST node representing the fade-in statement.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_function_call">
+<span class="sig-name descname"><span class="pre">parse_function_call</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_function_call"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_function_call" title="Link to this definition"></a></dt>
+<dd><section id="id68">
+<h2>Description<a class="headerlink" href="#id68" title="Link to this heading"></a></h2>
+<p>Parse a function call expression.
+Syntax: &lt;FUNCTION_NAME&gt;(&lt;ARG1&gt; [&lt;ARG2&gt;, …, &lt;ARGN&gt;])</p>
+<blockquote>
+<div><p>[argument]: argument is optional</p>
+</div></blockquote>
+<p>Syntax enforcement: Raises DetailedError if invalid argument type or missing RPAREN.</p>
+</section>
+<section id="id69">
+<h2>Arguments<a class="headerlink" href="#id69" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id70">
+<h2>Returns<a class="headerlink" href="#id70" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>FunctionCallNode</dt><dd><p>AST node representing the function call with arguments and keyword assignments.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_image">
+<span class="sig-name descname"><span class="pre">parse_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_image" title="Link to this definition"></a></dt>
+<dd><section id="id71">
+<h2>Description<a class="headerlink" href="#id71" title="Link to this heading"></a></h2>
+<p>Parse an ‘image’ statement defining a scene image.
+Syntax: image &lt;identifier&gt; [as &lt;alias&gt;] = &lt;path&gt;</p>
+<blockquote>
+<div><p>[argument]: argument is optional</p>
+</div></blockquote>
+<p>Syntax enforcement: Raises DetailedError if syntax, alias, or path are invalid.</p>
+<p>Tips:
+An image identifier contains at least one USER token: the first token is the 
+main name, and any subsequent tokens are optional tags for variants.</p>
+</section>
+<section id="id72">
+<h2>Arguments<a class="headerlink" href="#id72" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id73">
+<h2>Returns<a class="headerlink" href="#id73" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>ImageNode</dt><dd><p>AST node representing the image declaration with optional alias.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_jump">
+<span class="sig-name descname"><span class="pre">parse_jump</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_jump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_jump" title="Link to this definition"></a></dt>
+<dd><section id="id74">
+<h2>Description<a class="headerlink" href="#id74" title="Link to this heading"></a></h2>
+<p>Parse a ‘jump’ statement.
+Syntax: jump &lt;label_name&gt;
+Syntax enforcement: Raises DetailedError if invalid token or syntax.</p>
+</section>
+<section id="id75">
+<h2>Arguments<a class="headerlink" href="#id75" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id76">
+<h2>Returns<a class="headerlink" href="#id76" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>JumpNode</dt><dd><p>AST node representing the jump statement.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_play">
+<span class="sig-name descname"><span class="pre">parse_play</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_play"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_play" title="Link to this definition"></a></dt>
+<dd><section id="id77">
+<h2>Description<a class="headerlink" href="#id77" title="Link to this heading"></a></h2>
+<p>Parse a ‘play’ statement for music or sound.
+Syntax: play (music|sound|voice) audio_file [fadein [time]] [loop]</p>
+<blockquote>
+<div><p>[argument]: optional
+arg1|arg2|arg3: one of these audio types is expected</p>
+</div></blockquote>
+<p>Syntax enforcement: Raises DetailedError if syntax or arguments are invalid.</p>
+<p>Tips: 
+music is for background music
+sound is for SFX
+voice is for character’s voice</p>
+</section>
+<section id="id78">
+<h2>Arguments<a class="headerlink" href="#id78" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id79">
+<h2>Returns<a class="headerlink" href="#id79" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>PlayNode</dt><dd><p>AST node representing the play statement with optional fade-in duration.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_return">
+<span class="sig-name descname"><span class="pre">parse_return</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_return"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_return" title="Link to this definition"></a></dt>
+<dd><section id="id80">
+<h2>Description<a class="headerlink" href="#id80" title="Link to this heading"></a></h2>
+<p>Parse a ‘return’ statement.
+Syntax: return [value]</p>
+<blockquote>
+<div><p>[argument]: argument is optional</p>
+</div></blockquote>
+<p>Syntax enforcement: Raises DetailedError if token sequence invalid.</p>
+</section>
+<section id="id81">
+<h2>Arguments<a class="headerlink" href="#id81" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id82">
+<h2>Returns<a class="headerlink" href="#id82" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>ReturnNode</dt><dd><p>AST node representing the return statement with optional value.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_stop">
+<span class="sig-name descname"><span class="pre">parse_stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_stop" title="Link to this definition"></a></dt>
+<dd><section id="id83">
+<h2>Description<a class="headerlink" href="#id83" title="Link to this heading"></a></h2>
+<p>Parse a ‘stop’ statement for music or sound.
+Syntax: stop [music|sound] [fadeout [duration]]</p>
+<blockquote>
+<div><p>[argument]: argument is optional
+arg1|arg2: either arg1 or arg2 is expected</p>
+</div></blockquote>
+<p>Syntax enforcement: Raises DetailedError if syntax or values are invalid.</p>
+</section>
+<section id="id84">
+<h2>Arguments<a class="headerlink" href="#id84" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id85">
+<h2>Returns<a class="headerlink" href="#id85" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>StopNode</dt><dd><p>AST node representing the stop statement, with optional audio type and fadeout duration.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_string">
+<span class="sig-name descname"><span class="pre">parse_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_string" title="Link to this definition"></a></dt>
+<dd><section id="id86">
+<h2>Description<a class="headerlink" href="#id86" title="Link to this heading"></a></h2>
+<p>Verify that the next token respects string syntax.
+Syntax enforcement: Raises DetailedError if token is not a valid STRING.</p>
+</section>
+<section id="id87">
+<h2>Arguments<a class="headerlink" href="#id87" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id88">
+<h2>Returns<a class="headerlink" href="#id88" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>StringNode</dt><dd><p>AST node representing the string value.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Parser.SimpleParser.parse_user">
+<span class="sig-name descname"><span class="pre">parse_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Parser.html#SimpleParser.parse_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Parser.SimpleParser.parse_user" title="Link to this definition"></a></dt>
+<dd><section id="id89">
+<h2>Description<a class="headerlink" href="#id89" title="Link to this heading"></a></h2>
+<p>Parse a user-defined identifier token.
+Syntax: USER &lt;user_variable&gt;
+Syntax enforcement: Raises DetailedError if token is not a valid identifier.</p>
+</section>
+<section id="id90">
+<h2>Arguments<a class="headerlink" href="#id90" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id91">
+<h2>Returns<a class="headerlink" href="#id91" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>UserNode</dt><dd><p>AST node representing the user identifier.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Error.html" class="btn btn-neutral float-left" title="Error module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Test.html" class="btn btn-neutral float-right" title="Test module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David J.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

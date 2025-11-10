@@ -326,6 +326,7 @@ class SimpleParser(RPParser): # All method in this class cannot exist inside syn
         elif token_type == self.EOF:
             return
         else:
+            print('token = ', self.list_tokens[self.idx])
             raise DetailedError(f"Unexpected token: {token_type}")
         
     def parse_jump(self): # BASIC_PARSER
@@ -380,7 +381,7 @@ class SimpleParser(RPParser): # All method in this class cannot exist inside syn
 
         # HANDLING the situation where the syntax is done 
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE':
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT':
             return ReturnNode(value=None)
         
         # HANDLING USER token
@@ -415,7 +416,7 @@ class SimpleParser(RPParser): # All method in this class cannot exist inside syn
         
         # HANDLING the situation where the syntax is done 
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE': 
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT': 
             self.eof_line()
             return StopNode()
         
@@ -427,12 +428,15 @@ class SimpleParser(RPParser): # All method in this class cannot exist inside syn
         elif audio_val == 'sound':
             self.eat('KEYWORD', 'sound')
             self.skip_spaces()
+        elif audio_val == 'voice':
+            self.eat('KEYWORD', 'voice')
+            self.skip_spaces()
         else:
-            raise DetailedError(f'Stop syntax error. Expected either music or sound but got {audio_val}')
+            raise DetailedError(f'Stop syntax error. Expected either music or sound or voice but got {audio_val}')
         
         # HANDLING the situation where the syntax is done 
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE': 
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT': 
             self.eof_line()
             return StopNode(audio_type=audio_val)
         
@@ -445,7 +449,7 @@ class SimpleParser(RPParser): # All method in this class cannot exist inside syn
 
         # HANDLING the situation where the syntax is done 
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE': 
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT': 
             self.eof_line()
             return StopNode(audio_type=audio_val, fadeout=2) # 2 sec is default value of fadeout when user does not precise
 
@@ -493,14 +497,14 @@ class SimpleParser(RPParser): # All method in this class cannot exist inside syn
                 raise DetailedError(f"Wrong argument in function call. Expected either {accepted_types} arguments but got {arg_token_type} instead")
             elif arg_token_type == 'KEYWORD' and arg_token_value not in accepted_values_KEYWORD:
                 raise DetailedError(f"Wrong argument in function call. Expected {accepted_values_KEYWORD} arguments but got {arg_token_value} instead")
-            else:
+            else: # We are handling an arg or a kwargs
                 if arg_token_type == 'USER':
                     ast_args_list.append(self.parse_user())
                 elif arg_token_type == 'STRING':
                     ast_args_list.append(self.parse_string())
                 elif arg_token_type == 'ASSIGN':
                     ast_kwargs.append(self.parse_assign_local())
-                else:
+                else: # We are not storing this information:
                     self.eat(arg_token_type)
         
         if self.idx >= len(self.list_tokens):
@@ -539,7 +543,7 @@ class SimpleParser(RPParser): # All method in this class cannot exist inside syn
 
         # HANDLING the situation where the syntax is done 
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE':
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT':
             return args
         
         # HANDLING fadein or loop
@@ -560,7 +564,7 @@ class SimpleParser(RPParser): # All method in this class cannot exist inside syn
         
         # HANDLING the situation where the syntax is done 
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE':
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT':
             return args
         
         # HANDLING loop
@@ -607,12 +611,17 @@ class SimpleParser(RPParser): # All method in this class cannot exist inside syn
         self.skip_spaces()
 
         # HANDLING the audio file (correspond to 'path' in the syntax)
-        _audiofile = self.parse_string()
+        _audiofile = ""
+        token_type, token_val = __BREAK__TOKEN__(self.token_peek(return_type=False))
+        if token_type == 'STRING':
+            _audiofile = self.parse_string()
+        else: # it must be a user token
+            _audiofile = self.parse_user()
         self.skip_spaces()
         
         # HANDLING the situation where the syntax is done 
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE':
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT':
             return PlayNode(audio_type=_audio_type, audio_file=_audiofile)
         
         # HANDLING loop or fadein
@@ -1049,7 +1058,8 @@ class DispatchParser(SimpleParser): # Must inherit SimpleParser later on
             transition_ast = TransitionNode(transition_name=token_value)
             self.eat('BUILTIN', token_value)
         elif token_type == 'USER':
-            transition_ast = self.parse_user()
+            transition_value = self.parse_user()
+            transition_ast = TransitionNode(transition_name=transition_value)
 
         self.skip_spaces()
         self.eof_line()
@@ -1110,7 +1120,7 @@ class DispatchParser(SimpleParser): # Must inherit SimpleParser later on
 
         # HANDLING next token:
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE': 
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT': 
             self.eof_line()
             return args
         
@@ -1174,7 +1184,7 @@ class DispatchParser(SimpleParser): # Must inherit SimpleParser later on
 
         # HANDLING whether the statement is done or not:
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE': 
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT': 
             self.eof_line() 
             return args
         
@@ -1223,7 +1233,7 @@ class DispatchParser(SimpleParser): # Must inherit SimpleParser later on
         # HANDLING syntax 'image_expression -> n * SPACE'
         stopping_values = ['\n', 'at', 'onlayer', 'with']
         img_expression = []
-        while (token != self.EOF and token_value not in stopping_values):
+        while (token != self.EOF and token_type != 'COMMENT' and token_value not in stopping_values):
             if token_type == 'USER':
                 img_expression.append(self.parse_user())
             elif token_type == 'SPACE': 
@@ -1238,7 +1248,7 @@ class DispatchParser(SimpleParser): # Must inherit SimpleParser later on
         args['image_expression'] = img_expression
 
         # HANDLING next token, if it's EOF or NEWLINE we return the current args for parent function (parse_scene):
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE': 
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT': 
             self.eof_line()
             return args
         
@@ -1299,7 +1309,7 @@ class SceneParser(DispatchParser):
 
         # HANDLING the situation where 'scene' is not followed by any other argument accepted by the renpy syntax 
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE': 
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT': 
             return SceneNode() # syntax corresponds to 'scene' only
         
         # We will build the arguments of SceneNode with all the dispatch handler. We start from here:
@@ -1368,7 +1378,7 @@ class ShowParser(DispatchParser):
 
         # HANDLING the situation where 'scene' is not followed by any other argument accepted by the renpy syntax 
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE': 
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT': 
             return ShowNode() # syntax corresponds to 'show' only
         
         # We will build the arguments of SceneNode with all the dispatch handler. We start from here:
@@ -1437,7 +1447,7 @@ class HideParser(DispatchParser):
 
         # HANDLING the situation where 'scene' is not followed by any other argument accepted by the renpy syntax 
         token = self.token_peek(return_type=False)
-        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE': 
+        if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'NEWLINE' or __GET__TYPE__TOKEN__(token) == 'COMMENT': 
             return HideNode() # syntax corresponds to 'show' only
         
         # We will build the arguments of SceneNode with all the dispatch handler. We start from here:
@@ -1471,6 +1481,23 @@ class LabelParser(SceneParser, ShowParser, HideParser):
     def __init__(self, list_tokens):
         super().__init__(list_tokens)
 
+    def parse_dialogue(self):
+        # If we read a USER token inside label body: we expect to read a dialogue.
+        # dialogue is something like e "Hello, I am Eileen and I am talking" where 'e' was declared with 'define' and 'Character' statements
+        # We can also have Character('Eileen') "Hello I am eileen" even if it's less common
+        token_type, token_value =  __BREAK__TOKEN__(self.token_peek(return_type=False))
+
+        ast_speaker = ""
+        if token_type == 'FUNCTION' and 'Character(' in token_value:
+            ast_speaker = self.parse_function_call()
+        else:
+            ast_speaker = self.parse_user()
+        self.skip_spaces()
+        ast_string = self.parse_string()
+
+        return DialogueNode(speaker=ast_speaker, text=ast_string)
+
+
     def check_body_token(self):
         """
         Description
@@ -1498,12 +1525,13 @@ class LabelParser(SceneParser, ShowParser, HideParser):
             'COMMENT': self.parse_comment,
             'return': self.parse_return,
             'jump': self.parse_jump,
-            'USER': self.parse_user
+            'USER': self.parse_dialogue
             # 'DOLLARS': self.parse_dollars, # Not implemented
         }
 
         parse_method = self._get_parser(syntax_handler)
         ast_object = parse_method()
+        self.eof_line()
 
         return ast_object
 
@@ -1531,13 +1559,16 @@ class LabelParser(SceneParser, ShowParser, HideParser):
                 self.eat_optional('SPACE')
                 indent_cpt += 1
             
+            while self.token_peek() == 'COMMENT':
+                self.parse_comment()
+
             token = self.token_peek(return_type=False)
             tk_type = __GET__TYPE__TOKEN__(token)
-
+        
         if indent_cpt == INDENTATION:
             return False
         else:
-            if token == self.EOF or __GET__TYPE__TOKEN__(token) == 'COMMENT': # No need to check indentation for a comment
+            if token == self.EOF: # No need to check indentation for a comment
                 return True 
             elif indent_cpt == 0: # We check the first non-SPACE and non-NEWLINE token at the beginning of a line
                 if __GET__VALUE__TOKEN__(token) in TOPLEVEL_TOKENS_VALUES or __GET__TYPE__TOKEN__(token) in TOPLEVEL_TOKENS_VALUES:
@@ -1584,6 +1615,8 @@ class LabelParser(SceneParser, ShowParser, HideParser):
             self.eat('KEYWORD', token_value)
             label_name = KeywordNode(token_value)
         self.eat('COLON')
+        self.skip_spaces()
+        self.eof_line()
         while self.token_peek() == 'NEWLINE':
             self.eat_optional('NEWLINE')
 
@@ -1601,9 +1634,9 @@ class LabelParser(SceneParser, ShowParser, HideParser):
         token = self.token_peek(return_type=False)
         tk_type, tk_val = __BREAK__TOKEN__(token)
 
-        while (token!= self.EOF and tk_val != 'label' and tk_val != 'return' and tk_val != 'jump'):
+        while (token!= self.EOF and tk_val != 'label' and tk_val != 'return'):
             if tk_type == 'NEWLINE':
-                if self.check_end_label(IDENT_NB): # The label does not end with return or jump
+                if self.check_end_label(IDENT_NB): # We check if the label is ending
                     return LabelNode(label=label_name, body=body_ast)
             else:
                 ast = self.check_body_token()
@@ -1657,7 +1690,8 @@ class MasterParser(LabelParser):
 
         parse_method = self._get_parser(syntax_handler)
         ast_object = parse_method()
-    
+
+
         return ast_object
 
     def parse_renpy_file(self):

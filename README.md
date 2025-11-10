@@ -1,8 +1,8 @@
 # Renpy-Compiler
 
-**Status:** Ongoing (Work in progress)
+**Status:** Completed
 
-Renpy-Compiler is an ongoing project that implements a complete **AST(1) construction and semantic analysis** pipeline for a Ren’Py-inspired scripting language (RnP). The compiler parses `.rpy`-style scripts and generates an abstract syntax tree (AST) that can be used by a runtime engine to execute and render visual novels.
+Renpy-Compiler is project that implements a complete **AST(1) construction and semantic analysis** pipeline for a Ren’Py-inspired scripting language (RnP). The compiler parses `.rpy`-style scripts and generates an abstract syntax tree (AST) that can be used by a runtime engine to execute and render visual novels (a storytelling type video game).
 
 ---
 (1) An AST (Abstract Syntax Tree) is a tree representation of the syntactic structure of source code, where each node corresponds to a construct in the language (e.g., DefineNode, LabelNode, SceneNode).
@@ -27,10 +27,10 @@ Renpy-Compiler is an ongoing project that implements a complete **AST(1) constru
 ---
 ## Usage / Installation
 
-Currently it's possible to select a Ren’Py file and a parser method to test, generating the AST object for the Renpy file. 
+Currently it's possible to select a Ren’Py file and a parser method to test, generating the AST object for the Renpy file or generate a visual novel from a simplified renpy script.
 
 Please refer to the following documents to use this project:
-- src/INSTALL.MD : To install the required dependencies
+- INSTALL/INSTALL.MD : To install the required dependencies
 - Read the comments at the top of the file src/Test.py and modify as needed to test the desired parser method.
   
 ## Project Status

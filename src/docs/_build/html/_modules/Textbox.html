@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Textbox &mdash; Renpy Interpreter 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=cb975c41"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Renpy Interpreter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Renpy Interpreter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Textbox</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Textbox</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygame</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<div class="viewcode-block" id="is_rgba">
+<a class="viewcode-back" href="../Textbox.html#Textbox.is_rgba">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_rgba</span><span class="p">(</span><span class="n">value</span><span class="p">):</span><span class="c1"># Returns if value is a tuple of 4 values.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Description</span>
+<span class="sd">    -----------</span>
+<span class="sd">    Returns True if the value is a tuple containing 4 integers, each representing a color channel</span>
+<span class="sd">    (Red, Green, Blue, Alpha), where each integer is between 0 and 255.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    value: The value to check.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool: True if value is a tuple of 4 integers, each in the range [0, 255], otherwise False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span>
+        <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="mi">255</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">value</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="scale_img">
+<a class="viewcode-back" href="../Textbox.html#Textbox.scale_img">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">scale_img</span><span class="p">(</span><span class="n">img</span><span class="p">:</span><span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="n">desired_width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">desired_height</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Description</span>
+<span class="sd">    -----------</span>
+<span class="sd">    Scales the given image to the desired width and height while maintaining the aspect ratio </span>
+<span class="sd">    if one of the dimensions is set to 0. If both dimensions are provided, the image is scaled </span>
+<span class="sd">    to the exact size (aspect ratio may not be preserved).</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    img (pygame.image): The image to be scaled.</span>
+<span class="sd">    desired_width (int, optional): The target width of the image. Defaults to 0.</span>
+<span class="sd">    desired_height (int, optional): The target height of the image. Defaults to 0.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pygame.image: The scaled image.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># returns the scaled image. To keep ratio either desired_width must be 0 or desired_height must be 0</span>
+    <span class="k">if</span> <span class="n">desired_height</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">desired_width</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">img</span>
+    <span class="k">elif</span> <span class="n">desired_height</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">desired_width</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># Ratio is not necessarily kept</span>
+        <span class="k">return</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">desired_width</span><span class="p">,</span> <span class="n">desired_height</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">desired_height</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">desired_width</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># Ratio is kept</span>
+        <span class="n">scale_ratio</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="n">img</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">desired_width</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">desired_width</span> <span class="o">/</span> <span class="n">scale_ratio</span><span class="p">)))</span>
+    <span class="k">elif</span> <span class="n">desired_height</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">desired_width</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># Ratio is kept</span>
+        <span class="n">scale_ratio</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="n">img</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">desired_height</span> <span class="o">/</span> <span class="n">scale_ratio</span><span class="p">),</span> <span class="n">desired_height</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Gradient">
+<a class="viewcode-back" href="../Textbox.html#Textbox.Gradient">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Gradient</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to create a Gradient color used in Textbox&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color1</span><span class="p">,</span> <span class="n">color2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_rgba</span><span class="p">(</span><span class="n">color1</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">is_rgba</span><span class="p">(</span><span class="n">color2</span><span class="p">):</span> <span class="c1"># protection</span>
+            <span class="k">return</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">gradient_color1</span> <span class="o">=</span> <span class="n">color1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gradient_color2</span> <span class="o">=</span> <span class="n">color2</span>
+
+<div class="viewcode-block" id="Gradient.create_vertical_gradient">
+<a class="viewcode-back" href="../Textbox.html#Textbox.Gradient.create_vertical_gradient">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_vertical_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">flip</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+<span class="sd">        Creates a vertical gradient surface where the color transitions from the top color to </span>
+<span class="sd">        the bottom color (or vice versa if `flip` is True). The gradient is drawn line by line </span>
+<span class="sd">        across the height of the surface.</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        width: The width of the gradient surface.</span>
+<span class="sd">        height: The height of the gradient surface.</span>
+<span class="sd">        flip (optional): If True, the gradient&#39;s color direction is flipped (i.e., </span>
+<span class="sd">                                the bottom color becomes the top color). Defaults to False.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pygame.Surface: A surface containing the vertical gradient.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">top_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_color1</span>
+        <span class="n">bottom_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_color2</span>
+        <span class="k">if</span> <span class="n">flip</span><span class="p">:</span>
+            <span class="n">top_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_color2</span>
+            <span class="n">bottom_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_color1</span>
+        <span class="n">gradient</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">pygame</span><span class="o">.</span><span class="n">SRCALPHA</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+            <span class="n">ratio</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">height</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">top_color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">)</span> <span class="o">+</span> <span class="n">bottom_color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">)</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">top_color</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">)</span> <span class="o">+</span> <span class="n">bottom_color</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">top_color</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">)</span> <span class="o">+</span> <span class="n">bottom_color</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">top_color</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">)</span> <span class="o">+</span> <span class="n">bottom_color</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">)</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">gradient</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">gradient</span></div>
+</div>
+
+        
+<div class="viewcode-block" id="TextBox">
+<a class="viewcode-back" href="../Textbox.html#Textbox.TextBox">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TextBox</span><span class="p">():</span> 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for the textbox in game&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">220</span><span class="p">),</span> <span class="n">offset_x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">offset_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">gr</span><span class="p">:</span> <span class="n">Gradient</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">flip_gradient</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">offset_x</span><span class="p">,</span> <span class="n">offset_y</span><span class="p">,</span> <span class="n">gr</span><span class="p">,</span> <span class="n">flip_gradient</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TextBox.resize">
+<a class="viewcode-back" href="../Textbox.html#Textbox.TextBox.resize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">220</span><span class="p">),</span> <span class="n">offset_x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">offset_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">gr</span><span class="p">:</span> <span class="n">Gradient</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">flip_gradient</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span> <span class="c1"># On rescale self.image</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+
+<span class="sd">        Resizes the textbox surface and applies a customizable gradient or tint to it. The function</span>
+<span class="sd">        scales a frame image to match the specified width and height, and optionally applies a gradient</span>
+<span class="sd">        or color tint for styling.</span>
+
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        width (optional): The new width of the textbox. Defaults to 0.</span>
+<span class="sd">        height (optional): The new height of the textbox. Defaults to 0.</span>
+<span class="sd">        color (optional): A tuple representing the RGBA color to apply as a tint. Defaults to (255, 0, 0, 220).</span>
+<span class="sd">        offset_x (optional): The horizontal offset used to adjust the position of the elements inside the textbox. Defaults to 10.</span>
+<span class="sd">        offset_y (optional): The vertical offset used to adjust the position of the elements inside the textbox. Defaults to 0.</span>
+<span class="sd">        gr (optional): A `Gradient` object for generating a gradient effect between two colors. Defaults to None.</span>
+<span class="sd">        flip_gradient (optional): If True, the gradient is flipped vertically. Defaults to False.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None: This function modifies the instance variable `self.textbox` to the resized surface.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># protection</span>
+        <span class="k">if</span> <span class="n">width</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">height</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        
+        <span class="c1"># Surface displayed on screen in the main loop:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">textbox</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">pygame</span><span class="o">.</span><span class="n">SRCALPHA</span><span class="p">)</span>
+        
+        <span class="c1"># Store basic attributes:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset_x</span> <span class="o">=</span> <span class="n">offset_x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset_y</span> <span class="o">=</span> <span class="n">offset_y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gr_class</span> <span class="o">=</span> <span class="n">gr</span>
+
+        <span class="c1"># Using a frame to give the textbox a stylized look</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">TextBox</span><span class="p">,</span> <span class="s2">&quot;_panel_img&quot;</span><span class="p">):</span>
+            <span class="n">TextBox</span><span class="o">.</span><span class="n">_panel_img</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;../img/panel-031.png&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert_alpha</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">panel</span> <span class="o">=</span> <span class="n">TextBox</span><span class="o">.</span><span class="n">_panel_img</span>
+        
+        <span class="n">panel_w</span><span class="p">,</span> <span class="n">panel_h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">panel</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+        <span class="n">texbox_img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">panel</span>
+
+        <span class="c1"># Split the frame into three parts to preserve its proportions when scaling</span>
+        <span class="n">texbox_left</span> <span class="o">=</span> <span class="n">texbox_img</span><span class="o">.</span><span class="n">subsurface</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">panel_w</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="n">panel_h</span><span class="p">))</span>
+        <span class="n">texbox_middle</span> <span class="o">=</span> <span class="n">texbox_img</span><span class="o">.</span><span class="n">subsurface</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">panel_w</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">panel_w</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="n">panel_h</span><span class="p">))</span>
+        <span class="n">texbox_right</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">texbox_left</span><span class="p">,</span> <span class="n">flip_x</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">flip_y</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        
+        <span class="c1"># Scaling each of the new surfaces dynamically (meaning that the textbox must adapt to window&#39;s current width)</span>
+        <span class="n">texbox_left</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">smoothscale</span><span class="p">(</span><span class="n">texbox_left</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">//</span><span class="mi">24</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">offset_y</span><span class="p">))</span> 
+        <span class="n">texbox_right</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">smoothscale</span><span class="p">(</span><span class="n">texbox_right</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">//</span><span class="mi">24</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">offset_y</span><span class="p">))</span> 
+        <span class="n">texbox_middle</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">smoothscale</span><span class="p">(</span><span class="n">texbox_middle</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">//</span><span class="mi">12</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset_y</span><span class="p">))</span>
+
+        <span class="c1"># Gradient (gradient effect between two color) or Tint (1 single color)</span>
+        <span class="k">if</span> <span class="n">gr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># We can&#39;t recolor the frame with Surface.fill() (it would disregard the frame), so we apply a tint instead</span>
+            <span class="n">tint_left</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">texbox_left</span><span class="o">.</span><span class="n">get_size</span><span class="p">(),</span> <span class="n">pygame</span><span class="o">.</span><span class="n">SRCALPHA</span><span class="p">)</span> <span class="c1"># textbox_right est une copie de textbox_left donc pas besoin de tint</span>
+            <span class="n">tint_middle</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">texbox_middle</span><span class="o">.</span><span class="n">get_size</span><span class="p">(),</span> <span class="n">pygame</span><span class="o">.</span><span class="n">SRCALPHA</span><span class="p">)</span>
+            <span class="n">tint_left</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_color</span><span class="p">)</span>  <span class="c1"># couleur avec alpha</span>
+            <span class="n">tint_middle</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_color</span><span class="p">)</span>
+                <span class="c1"># Application of the tint below:</span>
+            <span class="n">texbox_left</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">tint_left</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">special_flags</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">BLEND_RGBA_MULT</span><span class="p">)</span>
+            <span class="n">texbox_right</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">tint_left</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">special_flags</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">BLEND_RGBA_MULT</span><span class="p">)</span>
+            <span class="n">texbox_middle</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">tint_middle</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">special_flags</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">BLEND_RGBA_MULT</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">gradient</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">create_vertical_gradient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">flip_gradient</span><span class="p">)</span>
+            <span class="n">texbox_left</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">gradient</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">special_flags</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">BLEND_RGBA_MULT</span><span class="p">)</span>
+            <span class="n">texbox_right</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">gradient</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">special_flags</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">BLEND_RGBA_MULT</span><span class="p">)</span>
+            <span class="n">texbox_middle</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">gradient</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">special_flags</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">BLEND_RGBA_MULT</span><span class="p">)</span>
+
+        <span class="c1"># Blitting the three elements inside the image we will display</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">textbox</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">texbox_left</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">offset_x</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>     
+        <span class="bp">self</span><span class="o">.</span><span class="n">textbox</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">texbox_middle</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">//</span><span class="mi">24</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset_x</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">textbox</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">texbox_right</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">//</span><span class="mi">24</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset_x</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="TextBox.draw">
+<a class="viewcode-back" href="../Textbox.html#Textbox.TextBox.draw">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">screen</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+<span class="sd">        Draws the textbox on screen</span>
+<span class="sd">        </span>
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">textbox</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TextBox.complex_draw">
+<a class="viewcode-back" href="../Textbox.html#Textbox.TextBox.complex_draw">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">complex_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">screen</span><span class="p">,</span> <span class="n">pos_textbox</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">speaker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">font</span><span class="p">:</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">Font</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draws a textbox on the screen with optional speaker name and text wrapping.</span>
+<span class="sd">        This function handles dynamic text wrapping, including new lines, text centering, and optionally displaying </span>
+<span class="sd">        a speaker&#39;s name above the textbox.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">        ---------</span>
+<span class="sd">            screen: The screen or surface where the textbox and text will be drawn.</span>
+<span class="sd">            pos_textbox (optional): The (x, y) position to place the textbox on the screen. Defaults to (0, 0).</span>
+<span class="sd">            text (optional): The text to be displayed inside the textbox. If None, no text will be drawn.</span>
+<span class="sd">            speaker (optional): The name of the speaker to be displayed above the textbox. If None, no speaker is displayed.</span>
+<span class="sd">            font (optional): The font to be used for drawing the text. If None, the default font will be used.</span>
+<span class="sd">            color (optional): The color of the text and speaker name, as an (R, G, B) tuple. Defaults to black (0, 0, 0).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        -------</span>
+<span class="sd">            None: This function modifies the screen by drawing the textbox, speaker, and text onto it.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pos_textbox</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pos_textbox</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Blit the textbox itself</span>
+        <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">textbox</span><span class="p">,</span> <span class="n">pos_textbox</span><span class="p">)</span>
+
+        <span class="c1"># Use default font if none provided</span>
+        <span class="k">if</span> <span class="n">font</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+        <span class="c1"># Draw speaker if provided</span>
+        <span class="k">if</span> <span class="n">speaker</span><span class="p">:</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+            <span class="n">speaker</span> <span class="o">=</span> <span class="n">speaker</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+            <span class="n">speaker_offset_x</span> <span class="o">=</span> <span class="mi">90</span>
+            <span class="n">speaker_offset_y</span> <span class="o">=</span> <span class="mi">25</span>
+            <span class="n">speaker_surf</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">speaker</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="n">speaker_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos_textbox</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">speaker_offset_x</span><span class="p">,</span> <span class="n">pos_textbox</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">speaker_offset_y</span><span class="p">)</span>
+            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">speaker_surf</span><span class="p">,</span> <span class="n">speaker_pos</span><span class="p">)</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># No text to draw</span>
+
+        <span class="c1"># Maximum width for text inside textbox</span>
+        <span class="n">max_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset_x</span>
+
+        <span class="c1"># Normalize newlines - replace \\n with \n first</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Replace any combination of spaces and newlines with proper newlines</span>
+        <span class="c1"># This handles: &#39;\n \n&#39;, &#39;\n  \n&#39;, &#39;\n\n&#39;, &#39;  \n  &#39;, etc.</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[ \t]*\n[ \t]*&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+        
+        <span class="c1"># Now split by newlines to get paragraphs (empty strings represent blank lines)</span>
+        <span class="n">paragraphs</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Initialize the list of lines</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">paragraph</span> <span class="ow">in</span> <span class="n">paragraphs</span><span class="p">:</span>
+            <span class="c1"># Strip only leading/trailing spaces from the paragraph</span>
+            <span class="n">paragraph</span> <span class="o">=</span> <span class="n">paragraph</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            
+            <span class="k">if</span> <span class="n">paragraph</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="c1"># Empty paragraph = blank line in output</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Process this paragraph with word wrapping</span>
+                <span class="n">words</span> <span class="o">=</span> <span class="n">paragraph</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">current_line</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                
+                <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+                    <span class="c1"># Try adding this word to the current line</span>
+                    <span class="n">test_line</span> <span class="o">=</span> <span class="n">current_line</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">current_line</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">word</span>
+                    
+                    <span class="k">if</span> <span class="n">font</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">test_line</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">max_width</span> <span class="o">-</span> <span class="mi">120</span><span class="p">:</span>
+                        <span class="c1"># Word fits, add it to current line</span>
+                        <span class="n">current_line</span> <span class="o">=</span> <span class="n">test_line</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># Word doesn&#39;t fit, save current line and start new one</span>
+                        <span class="k">if</span> <span class="n">current_line</span><span class="p">:</span>
+                            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_line</span><span class="p">)</span>
+                        <span class="n">current_line</span> <span class="o">=</span> <span class="n">word</span>
+                
+                <span class="c1"># Don&#39;t forget the last line of this paragraph</span>
+                <span class="k">if</span> <span class="n">current_line</span><span class="p">:</span>
+                    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_line</span><span class="p">)</span>
+
+        <span class="c1"># Total height of text block</span>
+        <span class="n">line_height</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">get_linesize</span><span class="p">()</span>
+        <span class="n">total_height</span> <span class="o">=</span> <span class="n">line_height</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
+        <span class="c1"># Starting y position to vertically center the text in the textbox</span>
+        <span class="n">start_y</span> <span class="o">=</span> <span class="n">pos_textbox</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">total_height</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+        <span class="c1"># Draw each line centered</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>  <span class="c1"># Skip empty lines (but they still take up space in the layout)</span>
+            <span class="n">text_surf</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="n">text_x</span> <span class="o">=</span> <span class="n">pos_textbox</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">text_surf</span><span class="o">.</span><span class="n">get_width</span><span class="p">())</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">text_y</span> <span class="o">=</span> <span class="n">start_y</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">line_height</span>
+            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">text_surf</span><span class="p">,</span> <span class="p">(</span><span class="n">text_x</span><span class="p">,</span> <span class="n">text_y</span><span class="p">))</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David J.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

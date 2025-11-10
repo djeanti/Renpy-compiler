@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AST module &mdash; Renpy Interpreter 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=cb975c41"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Error module" href="Error.html" />
+    <link rel="prev" title="src" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Renpy Interpreter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">AST module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#AST.ASTNode"><code class="docutils literal notranslate"><span class="pre">ASTNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.AssignNode"><code class="docutils literal notranslate"><span class="pre">AssignNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.DefineNode"><code class="docutils literal notranslate"><span class="pre">DefineNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.DialogueNode"><code class="docutils literal notranslate"><span class="pre">DialogueNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.FunctionCallNode"><code class="docutils literal notranslate"><span class="pre">FunctionCallNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AST.FunctionCallNode.get_character_name"><code class="docutils literal notranslate"><span class="pre">FunctionCallNode.get_character_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#AST.FunctionCallNode.get_user_tokens"><code class="docutils literal notranslate"><span class="pre">FunctionCallNode.get_user_tokens()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.HideNode"><code class="docutils literal notranslate"><span class="pre">HideNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AST.HideNode.get_full_name"><code class="docutils literal notranslate"><span class="pre">HideNode.get_full_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.ImageNode"><code class="docutils literal notranslate"><span class="pre">ImageNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AST.ImageNode.get_value"><code class="docutils literal notranslate"><span class="pre">ImageNode.get_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.JumpNode"><code class="docutils literal notranslate"><span class="pre">JumpNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.KeywordNode"><code class="docutils literal notranslate"><span class="pre">KeywordNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.LabelNode"><code class="docutils literal notranslate"><span class="pre">LabelNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AST.LabelNode.get_next_label"><code class="docutils literal notranslate"><span class="pre">LabelNode.get_next_label()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.LayerNode"><code class="docutils literal notranslate"><span class="pre">LayerNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.MasterNode"><code class="docutils literal notranslate"><span class="pre">MasterNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.PlayNode"><code class="docutils literal notranslate"><span class="pre">PlayNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.ReturnNode"><code class="docutils literal notranslate"><span class="pre">ReturnNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.SceneNode"><code class="docutils literal notranslate"><span class="pre">SceneNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AST.SceneNode.get_full_name"><code class="docutils literal notranslate"><span class="pre">SceneNode.get_full_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.ShowNode"><code class="docutils literal notranslate"><span class="pre">ShowNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AST.ShowNode.get_full_name"><code class="docutils literal notranslate"><span class="pre">ShowNode.get_full_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.StopNode"><code class="docutils literal notranslate"><span class="pre">StopNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.StringNode"><code class="docutils literal notranslate"><span class="pre">StringNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.TransformNode"><code class="docutils literal notranslate"><span class="pre">TransformNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.TransitionNode"><code class="docutils literal notranslate"><span class="pre">TransitionNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#AST.UserNode"><code class="docutils literal notranslate"><span class="pre">UserNode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Error.html">Error module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html">Parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Test.html">Test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Textbox.html">Textbox module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tokens.html">Tokens module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conf.html">conf module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defs.html">defs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualnovel.html">visualnovel module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Renpy Interpreter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+      <li class="breadcrumb-item active">AST module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/AST.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-AST">
+<span id="ast-module"></span><h1>AST module<a class="headerlink" href="#module-AST" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.ASTNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">ASTNode</span></span><a class="reference internal" href="_modules/AST.html#ASTNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.ASTNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for all AST nodes.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.AssignNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">AssignNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LHS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RHS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#AssignNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.AssignNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store instructions using ‘=’ in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>LHS: The left-hand side of the assignment.
+RHS: The right-hand side of the assignment.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.DefineNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">DefineNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#DefineNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.DefineNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information from a define statement in Ren’Py language.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>id: The identifier being defined.
+value: The value assigned to the identifier.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.DialogueNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">DialogueNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speaker</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#DialogueNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.DialogueNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store a dialogue in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>speaker: The character or speaker of the dialogue (can be None for narration).
+text: The string content of the dialogue.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.FunctionCallNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">FunctionCallNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#FunctionCallNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.FunctionCallNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store functions in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the function being called.
+args: Positional arguments for the function call (list of ASTNodes).
+kwargs: Keyword arguments for the function call (list of ASTNode).</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="AST.FunctionCallNode.get_character_name">
+<span class="sig-name descname"><span class="pre">get_character_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#FunctionCallNode.get_character_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.FunctionCallNode.get_character_name" title="Link to this definition"></a></dt>
+<dd><p>Returns the first instance of StringNode (=character name) or UserNode (reference to character name) + color of associated character if it exist 
+when the function used is ‘Character’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AST.FunctionCallNode.get_user_tokens">
+<span class="sig-name descname"><span class="pre">get_user_tokens</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#FunctionCallNode.get_user_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.FunctionCallNode.get_user_tokens" title="Link to this definition"></a></dt>
+<dd><p>Collect all UserNode instances in args and kwargs of this FunctionCallNode</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.HideNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">HideNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_expression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#HideNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.HideNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information from a hide statement in Ren’Py language.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>image_expression: List containing the image name and optional tags (e.g., [‘eileen’, ‘happy’]).
+layer: Optional additional layer.
+transition: Optional transition effect (e.g., ‘fade’, ‘dissolve’).</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="AST.HideNode.get_full_name">
+<span class="sig-name descname"><span class="pre">get_full_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#HideNode.get_full_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.HideNode.get_full_name" title="Link to this definition"></a></dt>
+<dd><p>Return a string representing the full name of the image (e.g., ‘img_name tag1 tag2’)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.ImageNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">ImageNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">string_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#ImageNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.ImageNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information from an image statement in Ren’Py language.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>image_expression: List containing the image name and optional tags (e.g., [‘eileen’, ‘happy’]).
+path: Optional explicit path to the image file.
+user_var: Optional variable referencing the image path.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="AST.ImageNode.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#ImageNode.get_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.ImageNode.get_value" title="Link to this definition"></a></dt>
+<dd><p>Return the image path, or the user variable referencing it if no direct path exists.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.JumpNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">JumpNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#JumpNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.JumpNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information regarding the ‘jump’ instruction in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>label_name: The target label to jump to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.KeywordNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">KeywordNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#KeywordNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.KeywordNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information from a keyword in Ren’Py language.</p>
+<dl class="simple">
+<dt>Attribute:</dt><dd><p>value: The keyword string (e.g., ‘start’).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.LabelNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">LabelNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#LabelNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.LabelNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information from a label statement in Ren’Py language.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>label_name: The identifier of the label (e.g., ‘start’).
+body: List of AST nodes representing the statements inside the label.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="AST.LabelNode.get_next_label">
+<span class="sig-name descname"><span class="pre">get_next_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#LabelNode.get_next_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.LabelNode.get_next_label" title="Link to this definition"></a></dt>
+<dd><p>Return the name of the next label found in the first JumpNode of the body.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.LayerNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">LayerNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#LayerNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.LayerNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information regarding a layer in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>layer_name: The name of the layer where content is shown.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.MasterNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">MasterNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#MasterNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.MasterNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Represents the root of the AST for a Ren’Py script.</p>
+<p>This node contains a list of child AST nodes of any type, 
+allowing the tree to represent the entire script hierarchy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>children: A list of all the nodes found in the renpy script.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.PlayNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">PlayNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audio_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fadein</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#PlayNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.PlayNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information regarding the ‘play’ instruction in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>audio_type: Type of audio (‘music’, ‘sound’, or ‘voice’).
+audio_file: The audio file or variable reference. 
+fadein: Optional fade-in duration in seconds.
+loop: Whether the audio should loop continuously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.ReturnNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">ReturnNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#ReturnNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.ReturnNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information regarding the ‘return’ instruction in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>value: Optional value or expression being returned.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.SceneNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">SceneNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_expression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#SceneNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.SceneNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information from a scene statement in Ren’Py language.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>image_expression: List containing the image name and optional tags (e.g., [‘eileen’, ‘happy’]).
+layer: Optional additional layer.
+transform: Optional transform applied to the image (e.g., ‘left’, ‘right’).
+transition: Optional transition effect applied to the image (e.g., ‘fade’).</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="AST.SceneNode.get_full_name">
+<span class="sig-name descname"><span class="pre">get_full_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#SceneNode.get_full_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.SceneNode.get_full_name" title="Link to this definition"></a></dt>
+<dd><p>Return a string representing the full name of the image (e.g., ‘img_name tag1 tag2’)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.ShowNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">ShowNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_expression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#ShowNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.ShowNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information from a show statement in Ren’Py language.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>image_expression: List containing the image name and optional tags (e.g., [‘eileen’, ‘happy’]).
+layer: Optional additional layer.
+transform: Optional transform applied to the image (e.g., ‘left’, ‘right’).
+transition: Optional transition effect applied to the image (e.g., ‘fade’).</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="AST.ShowNode.get_full_name">
+<span class="sig-name descname"><span class="pre">get_full_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#ShowNode.get_full_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.ShowNode.get_full_name" title="Link to this definition"></a></dt>
+<dd><p>Return a string representing the full name of the image (e.g., ‘img_name tag1 tag2’)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.StopNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">StopNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fadeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#StopNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.StopNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information regarding the ‘stop’ instruction in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>audio_type: Type of audio to stop (‘music’, ‘sound’, or ‘voice’).
+fadeout: Optional fade-out duration in seconds.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.StringNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">StringNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#StringNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.StringNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information regarding a StringNode in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>value: The string value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.TransformNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">TransformNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transform_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#TransformNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.TransformNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information regarding a transform applied to an image.</p>
+<dl class="simple">
+<dt>Attribute:</dt><dd><p>transform_name: The name of the transform (e.g., ‘left’, ‘center’).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.TransitionNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">TransitionNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transition_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#TransitionNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.TransitionNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information regarding a transition in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>transition_name: The name of the transition (e.g., ‘fade’).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AST.UserNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AST.</span></span><span class="sig-name descname"><span class="pre">UserNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AST.html#UserNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AST.UserNode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AST.ASTNode" title="AST.ASTNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASTNode</span></code></a></p>
+<p>Custom AST node used to store information regarding a user variable in Renpy.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>name: The name of the identifier.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="src" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Error.html" class="btn btn-neutral float-right" title="Error module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David J.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

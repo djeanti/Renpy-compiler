@@ -138,7 +138,7 @@ class RPTokenizer():
         token_value = integer + '.' + decimal
 
         if not re.fullmatch(r'\d+\.\d+', token_value):
-            raise ValueError(f"Invalid fadeout number format: {token_value}")
+            raise ValueError(f"Invalid fadein/fadeout number format: {token_value}")
     
         # UPDATE self.idx to not keep reading '.' character
         self.idx = j
@@ -186,7 +186,7 @@ class RPTokenizer():
                     # The next character is not a known single-character token
                     # We must ensure it is allowed in Renpy syntax (letter, digit, or underscore for USER tokens)
                     if not re.match(r'[A-Za-z0-9_]', self.renpy_file[self.idx]):
-                        raise DetailedError(f'Syntax error while creating token. The character """{self.renpy_file[self.idx]}""" is not accepted by Renpy language.')
+                        raise DetailedError(f'Syntax error while creating token. The character """{self.renpy_file[self.idx]}""" is not accepted for this project.')
             else:
                 if token_char != False: 
                     # Case 2: Single-character token detected (e.g., '=', '(', ':', ')', ' ')

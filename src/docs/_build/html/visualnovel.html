@@ -1,0 +1,1011 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>visualnovel module &mdash; Renpy Interpreter 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=cb975c41"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="defs module" href="defs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Renpy Interpreter
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="AST.html">AST module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Error.html">Error module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Parser.html">Parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Test.html">Test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Textbox.html">Textbox module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tokens.html">Tokens module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conf.html">conf module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defs.html">defs module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">visualnovel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#visualnovel.StateMachine"><code class="docutils literal notranslate"><span class="pre">StateMachine</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.break_img_object"><code class="docutils literal notranslate"><span class="pre">StateMachine.break_img_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.break_txt_object"><code class="docutils literal notranslate"><span class="pre">StateMachine.break_txt_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.clear_audio"><code class="docutils literal notranslate"><span class="pre">StateMachine.clear_audio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.clear_layer"><code class="docutils literal notranslate"><span class="pre">StateMachine.clear_layer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.create_state_machine"><code class="docutils literal notranslate"><span class="pre">StateMachine.create_state_machine()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.display_state"><code class="docutils literal notranslate"><span class="pre">StateMachine.display_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.display_with_transition"><code class="docutils literal notranslate"><span class="pre">StateMachine.display_with_transition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.generate_VN"><code class="docutils literal notranslate"><span class="pre">StateMachine.generate_VN()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.get_dialogue_speaker"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_dialogue_speaker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.get_label"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_label()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.get_labels_order"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_labels_order()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.get_nested_img"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_nested_img()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.get_position_from_size"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_position_from_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.get_scenenode_img"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_scenenode_img()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.get_user_value"><code class="docutils literal notranslate"><span class="pre">StateMachine.get_user_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.handle_audio"><code class="docutils literal notranslate"><span class="pre">StateMachine.handle_audio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.init_audio_dict"><code class="docutils literal notranslate"><span class="pre">StateMachine.init_audio_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.init_img_dict"><code class="docutils literal notranslate"><span class="pre">StateMachine.init_img_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.init_txt_dict"><code class="docutils literal notranslate"><span class="pre">StateMachine.init_txt_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.isolate_chainblock_state"><code class="docutils literal notranslate"><span class="pre">StateMachine.isolate_chainblock_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.load_audio"><code class="docutils literal notranslate"><span class="pre">StateMachine.load_audio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.load_image"><code class="docutils literal notranslate"><span class="pre">StateMachine.load_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.pretty_dict"><code class="docutils literal notranslate"><span class="pre">StateMachine.pretty_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.pretty_list"><code class="docutils literal notranslate"><span class="pre">StateMachine.pretty_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.remove_img_obj"><code class="docutils literal notranslate"><span class="pre">StateMachine.remove_img_obj()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.remove_text_chainblock"><code class="docutils literal notranslate"><span class="pre">StateMachine.remove_text_chainblock()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.scale_image_to_wind"><code class="docutils literal notranslate"><span class="pre">StateMachine.scale_image_to_wind()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.StateMachine.search_tag_chainblock"><code class="docutils literal notranslate"><span class="pre">StateMachine.search_tag_chainblock()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#visualnovel.VisualNovelGenerator"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.output_result"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.output_result()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.pretty_dict"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.pretty_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.print_list_token"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.print_list_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.step1_loadfile"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step1_loadfile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.step2_tokenizer"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step2_tokenizer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.step3_parser"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step3_parser()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.step4_initialize_master_node"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step4_initialize_master_node()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.step4_label_body_initialize"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step4_label_body_initialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.step5_runtime"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.step5_runtime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.update_nested_table"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.update_nested_table()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.update_nested_table_image_node"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.update_nested_table_image_node()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualnovel.VisualNovelGenerator.verify_prior_declaration"><code class="docutils literal notranslate"><span class="pre">VisualNovelGenerator.verify_prior_declaration()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Renpy Interpreter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+      <li class="breadcrumb-item active">visualnovel module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/visualnovel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-visualnovel">
+<span id="visualnovel-module"></span><h1>visualnovel module<a class="headerlink" href="#module-visualnovel" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="visualnovel.StateMachine">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">visualnovel.</span></span><span class="sig-name descname"><span class="pre">StateMachine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol_table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ast_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_to_renpyf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to create a visual novel video game from a dictionnary (ast tree) using the pygame library.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.break_img_object">
+<span class="sig-name descname"><span class="pre">break_img_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.break_img_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.break_img_object" title="Link to this definition"></a></dt>
+<dd><section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>Extract key attributes from an image object dictionary in a Ren’Py scene.</p>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Link to this heading"></a></h2>
+<p><a href="#id115"><span class="problematic" id="id116">dict_</span></a> : The dictionary representing an image object with keys ‘layer’, ‘image’, ‘pos’, and ‘transition’.</p>
+</section>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h2>
+<p>tuple: A tuple containing (layer, image, pos, transition) extracted from the dictionary.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.break_txt_object">
+<span class="sig-name descname"><span class="pre">break_txt_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.break_txt_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.break_txt_object" title="Link to this definition"></a></dt>
+<dd><section id="id1">
+<h2>Description<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>Extract key attributes from a text object dictionary in a Ren’Py scene.</p>
+</section>
+<section id="id2">
+<h2>Arguments<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><a href="#id117"><span class="problematic" id="id118">dict_</span></a> : The dictionary representing a text object with keys ‘character’ and ‘text’.</p>
+</section>
+<section id="id3">
+<h2>Returns<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>tuple: A tuple containing (character, text) extracted from the dictionary.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.clear_audio">
+<span class="sig-name descname"><span class="pre">clear_audio</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.clear_audio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.clear_audio" title="Link to this definition"></a></dt>
+<dd><section id="id4">
+<h2>Description<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>Stops all audio playback (sound and voice) in the game.</p>
+<p>This function is intended to be called when transitioning to the next piece of dialogue. 
+It ensures that any ongoing sound effects or voice lines are stopped automatically, 
+without affecting the background music.</p>
+</section>
+<section id="id5">
+<h2>Arguments<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id6">
+<h2>Returns<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.clear_layer">
+<span class="sig-name descname"><span class="pre">clear_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_to_clear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainblock</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.clear_layer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.clear_layer" title="Link to this definition"></a></dt>
+<dd><section id="id7">
+<h2>Description<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>Remove all objects from a specific layer in a Ren’Py scene.</p>
+</section>
+<section id="id8">
+<h2>Arguments<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>layer_to_clear : The name of the layer to remove objects from.
+objects : A list of scene objects, each represented as a dictionary with potential ‘layer’ keys.</p>
+</section>
+<section id="id9">
+<h2>Returns<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>list of dict: The updated list with objects from the specified layer removed.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.create_state_machine">
+<span class="sig-name descname"><span class="pre">create_state_machine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.create_state_machine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.create_state_machine" title="Link to this definition"></a></dt>
+<dd><section id="id10">
+<h2>Description<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>Creates a state machine that processes labels, dialogue, and scene nodes, 
+then organizes and prepares data for rendering in the game.</p>
+<p>This function iterates through the labels, processes different node types (such as dialogue, scene, and show),
+and constructs a list of actions (<cite>chainblock</cite>) that will be executed sequentially. Each action (such as 
+displaying text or images) is associated with transitions, transformations, and layers to control how they 
+are rendered during gameplay.</p>
+<p>It also handles scaling of images and checks if a tag (for images) already exists to avoid duplicates.</p>
+</section>
+<section id="id11">
+<h2>Arguments<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p>screen_size : The size of the screen (width, height) to adjust image sizes and positions accordingly.</p>
+</section>
+<section id="id12">
+<h2>Returns<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>None</dt><dd><p>The state machine is constructed in place and does not return any value.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.display_state">
+<span class="sig-name descname"><span class="pre">display_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">texbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Textbox.html#Textbox.TextBox" title="Textbox.TextBox"><span class="pre">TextBox</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_textbox</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.display_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.display_state" title="Link to this definition"></a></dt>
+<dd><section id="id13">
+<h2>Description<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<p>Renders the current state of the scene onto the given surface, including images and text.</p>
+<p>Images are drawn according to the layer order and with their associated transitions.
+Text objects are rendered using the provided TextBox at the specified position.
+This function is typically called once per frame in the main loop.</p>
+</section>
+<section id="id14">
+<h2>Arguments<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<p>surface: The surface to render the scene on.
+texbox: The text box object used to render dialogue text.
+pos_textbox: The position (x, y) to draw the text box.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.display_with_transition">
+<span class="sig-name descname"><span class="pre">display_with_transition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface:</span> <span class="pre">&lt;module</span> <span class="pre">'pygame.display'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\Creation\\miniconda3\\envs\\visual_novel_env\\Lib\\site-packages\\pygame\\display.cp313-win_amd64.pyd'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img:</span> <span class="pre">&lt;module</span> <span class="pre">'pygame.image'</span> <span class="pre">from</span> <span class="pre">'C:\\Users\\Creation\\miniconda3\\envs\\visual_novel_env\\Lib\\site-packages\\pygame\\image.cp313-win_amd64.pyd'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos:</span> <span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition:</span> <span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.display_with_transition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.display_with_transition" title="Link to this definition"></a></dt>
+<dd><section id="id15">
+<h2>Description<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<p>Displays an image on the given Pygame surface with an optional transition effect.</p>
+<p>Supports multiple transition types such as fade, slide, movein, and dissolve. 
+Each transition gradually modifies the image’s appearance or position over time 
+according to the specified duration and animation parameters.</p>
+</section>
+<section id="id16">
+<h2>Arguments<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<p>surface: The surface to draw the image on.
+img: The image to display.
+pos: The target position (x, y) where the image should appear.
+transition: A dictionary describing the transition behavior.</p>
+</section>
+<section id="id17">
+<h2>Returns<a class="headerlink" href="#id17" title="Link to this heading"></a></h2>
+<p>dict: Updated transition dictionary reflecting the current animation state.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.generate_VN">
+<span class="sig-name descname"><span class="pre">generate_VN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.generate_VN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.generate_VN" title="Link to this definition"></a></dt>
+<dd><section id="id18">
+<h2>Description<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
+<p>Initializes and runs the visual novel game loop using Pygame, displaying nodes and transitions.</p>
+<p>This function sets up the Pygame window, initializes the state machine, and handles user input
+to navigate through the game states (represented by the <cite>state_machine</cite>). It processes <cite>KEYDOWN</cite>
+events for left and right arrow keys to navigate through the visual novel, updates the screen based
+on the current state, and handles transitions between game elements (such as text and images).</p>
+<p>It also displays a gradient textbox at the bottom of the screen and updates the display each frame.</p>
+</section>
+<section id="id19">
+<h2>Arguments<a class="headerlink" href="#id19" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id20">
+<h2>Returns<a class="headerlink" href="#id20" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>None</dt><dd><p>This function runs an interactive loop, updating the display and responding to user input in real-time.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.get_dialogue_speaker">
+<span class="sig-name descname"><span class="pre">get_dialogue_speaker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.get_dialogue_speaker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.get_dialogue_speaker" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the speaker’s name from the dialogue node.</p>
+<p>Resolves the speaker to a string by checking for various types of nodes
+(UserNode, FunctionCallNode, StringNode). Returns the speaker’s name 
+after extracting the appropriate value.</p>
+<section id="id21">
+<h2>Arguments<a class="headerlink" href="#id21" title="Link to this heading"></a></h2>
+<p>node: The dialogue node containing the speaker information.</p>
+</section>
+<section id="id22">
+<h2>Returns<a class="headerlink" href="#id22" title="Link to this heading"></a></h2>
+<p>str: The speaker’s name as a string.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.get_label">
+<span class="sig-name descname"><span class="pre">get_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.get_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.get_label" title="Link to this definition"></a></dt>
+<dd><section id="id23">
+<h2>Description<a class="headerlink" href="#id23" title="Link to this heading"></a></h2>
+<p>Retrieve a label node and its next label from the AST by name.</p>
+</section>
+<section id="id24">
+<h2>Arguments<a class="headerlink" href="#id24" title="Link to this heading"></a></h2>
+<p>label_name : The name of the label to search for.</p>
+</section>
+<section id="id25">
+<h2>Returns<a class="headerlink" href="#id25" title="Link to this heading"></a></h2>
+<p>tuple: A tuple (LabelNode, next_label_name) if found, otherwise (None, None).</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.get_labels_order">
+<span class="sig-name descname"><span class="pre">get_labels_order</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.get_labels_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.get_labels_order" title="Link to this definition"></a></dt>
+<dd><section id="id26">
+<h2>Description<a class="headerlink" href="#id26" title="Link to this heading"></a></h2>
+<p>Builds and returns the ordered list of label nodes to execute.</p>
+<p>Starting from the ‘start’ label, this method follows each subsequent
+label reference (via jump instruction in renpy) to determine
+the execution sequence of labels.</p>
+</section>
+<section id="id27">
+<h2>Arguments<a class="headerlink" href="#id27" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id28">
+<h2>Returns<a class="headerlink" href="#id28" title="Link to this heading"></a></h2>
+<p>list: Ordered list of label nodes representing execution flow.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.get_nested_img">
+<span class="sig-name descname"><span class="pre">get_nested_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.get_nested_img"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.get_nested_img" title="Link to this definition"></a></dt>
+<dd><section id="id29">
+<h2>Description<a class="headerlink" href="#id29" title="Link to this heading"></a></h2>
+<p>Retrieve the image path from a nested dictionary structure using a list of tags.</p>
+</section>
+<section id="id30">
+<h2>Arguments<a class="headerlink" href="#id30" title="Link to this heading"></a></h2>
+<p>list_of_tags : A list of keys representing the path through the nested dictionary.</p>
+</section>
+<section id="id31">
+<h2>Returns<a class="headerlink" href="#id31" title="Link to this heading"></a></h2>
+<p>str: The value corresponding to the final tag in the nested dictionary, typically the image path.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.get_position_from_size">
+<span class="sig-name descname"><span class="pre">get_position_from_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.get_position_from_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.get_position_from_size" title="Link to this definition"></a></dt>
+<dd><section id="id32">
+<h2>Description<a class="headerlink" href="#id32" title="Link to this heading"></a></h2>
+<p>Compute the top-left position of an object on the screen based on its size,
+the screen size, and a specified alignment or transformation keyword.</p>
+</section>
+<section id="id33">
+<h2>Arguments<a class="headerlink" href="#id33" title="Link to this heading"></a></h2>
+<p>obj_size : Width and height of the object (iw, ih).
+transform : Alignment or transformation keyword (e.g., ‘center’, ‘topright’, ‘offscreenleft’).
+screen_size : Width and height of the screen (sw, sh).
+debug : If True, prints debug information about the transform and computed position.</p>
+</section>
+<section id="id34">
+<h2>Returns<a class="headerlink" href="#id34" title="Link to this heading"></a></h2>
+<p>tuple of int: The (x, y) coordinates of the object’s top-left corner on the screen.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.get_scenenode_img">
+<span class="sig-name descname"><span class="pre">get_scenenode_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.get_scenenode_img"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.get_scenenode_img" title="Link to this definition"></a></dt>
+<dd><section id="id35">
+<h2>Description<a class="headerlink" href="#id35" title="Link to this heading"></a></h2>
+<p>Retrieve and load the image associated with a scene node.
+Supports both direct string paths and user-defined tokens, returning a Pygame surface.</p>
+</section>
+<section id="id36">
+<h2>Arguments<a class="headerlink" href="#id36" title="Link to this heading"></a></h2>
+<p>node : The scene node containing an image expression.</p>
+</section>
+<section id="id37">
+<h2>Returns<a class="headerlink" href="#id37" title="Link to this heading"></a></h2>
+<p>pygame.Surface: A Pygame surface object containing the loaded image.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.get_user_value">
+<span class="sig-name descname"><span class="pre">get_user_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.get_user_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.get_user_value" title="Link to this definition"></a></dt>
+<dd><section id="id38">
+<h2>Description<a class="headerlink" href="#id38" title="Link to this heading"></a></h2>
+<p>Recursively resolves a user-defined token to its final value.</p>
+<p>If the token refers to another user-defined token, the method continues
+to follow the chain of references until a non-UserNode value is found.</p>
+</section>
+<section id="id39">
+<h2>Arguments<a class="headerlink" href="#id39" title="Link to this heading"></a></h2>
+<p>user_token: The user-defined token to resolve.</p>
+</section>
+<section id="id40">
+<h2>Returns<a class="headerlink" href="#id40" title="Link to this heading"></a></h2>
+<p>The final non-UserNode value associated with the user_token.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.handle_audio">
+<span class="sig-name descname"><span class="pre">handle_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.handle_audio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.handle_audio" title="Link to this definition"></a></dt>
+<dd><section id="id41">
+<h2>Description<a class="headerlink" href="#id41" title="Link to this heading"></a></h2>
+<p>Manages audio playback and stopping audio (music, voice, sound).</p>
+<p>Plays music, sound, or voice based on the given dictionary. Stops all audio or specific channels 
+(music, voice, sound) with optional fadeout.</p>
+<p>fadein when music|sound|voice starts is not handled.</p>
+</section>
+<section id="id42">
+<h2>Arguments<a class="headerlink" href="#id42" title="Link to this heading"></a></h2>
+<p>audio: Dictionary containing information regarding ‘music’, ‘voice’, ‘sound’, ‘stop’ renpy instructions.</p>
+</section>
+<section id="id43">
+<h2>Returns<a class="headerlink" href="#id43" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.init_audio_dict">
+<span class="sig-name descname"><span class="pre">init_audio_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.init_audio_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.init_audio_dict" title="Link to this definition"></a></dt>
+<dd><section id="id44">
+<h2>Description<a class="headerlink" href="#id44" title="Link to this heading"></a></h2>
+<p>Initialize a dictionary representing an audio object for Pygame with default values.</p>
+</section>
+<section id="id45">
+<h2>Arguments<a class="headerlink" href="#id45" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id46">
+<h2>Returns<a class="headerlink" href="#id46" title="Link to this heading"></a></h2>
+<p>dict: Dictionary with the content of the audio object.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.init_img_dict">
+<span class="sig-name descname"><span class="pre">init_img_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.init_img_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.init_img_dict" title="Link to this definition"></a></dt>
+<dd><section id="id47">
+<h2>Description<a class="headerlink" href="#id47" title="Link to this heading"></a></h2>
+<p>Initialize a dictionary representing a drawable image object for Pygame with default values.</p>
+</section>
+<section id="id48">
+<h2>Arguments<a class="headerlink" href="#id48" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id49">
+<h2>Returns<a class="headerlink" href="#id49" title="Link to this heading"></a></h2>
+<p>dict: Dictionary with default keys for image, position, layer, and transition settings.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.init_txt_dict">
+<span class="sig-name descname"><span class="pre">init_txt_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.init_txt_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.init_txt_dict" title="Link to this definition"></a></dt>
+<dd><section id="id50">
+<h2>Description<a class="headerlink" href="#id50" title="Link to this heading"></a></h2>
+<p>Initialize a dictionary representing a drawable dialogue object for Pygame with default values.</p>
+</section>
+<section id="id51">
+<h2>Arguments<a class="headerlink" href="#id51" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id52">
+<h2>Returns<a class="headerlink" href="#id52" title="Link to this heading"></a></h2>
+<p>dict: Dictionary with the content of the dialogue and the name of the character speaking.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.isolate_chainblock_state">
+<span class="sig-name descname"><span class="pre">isolate_chainblock_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chainblock</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.isolate_chainblock_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.isolate_chainblock_state" title="Link to this definition"></a></dt>
+<dd><section id="id53">
+<h2>Description<a class="headerlink" href="#id53" title="Link to this heading"></a></h2>
+<p>Creates a deep, isolated copy of the given chainblock to prevent shared references.</p>
+<dl>
+<dt>Explanation:</dt><dd><p>When assigning <cite>self.state_machine[self.idx] = chainblock</cite>, Python only stores
+a reference to the same list. Any later modification to <cite>chainblock</cite> will 
+automatically affect previously stored states in <cite>self.state_machine</cite>.</p>
+<p>This method ensures each saved state is independent by manually copying 
+each element and duplicating non-serializable objects such as Pygame Surfaces.</p>
+</dd>
+</dl>
+</section>
+<section id="id54">
+<h2>Arguments<a class="headerlink" href="#id54" title="Link to this heading"></a></h2>
+<p>chainblock: List of scene objects representing the current visual/audio state.</p>
+</section>
+<section id="id55">
+<h2>Returns<a class="headerlink" href="#id55" title="Link to this heading"></a></h2>
+<p>list: A new list containing deep copies of all objects in the chainblock.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.load_audio">
+<span class="sig-name descname"><span class="pre">load_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_canal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.load_audio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.load_audio" title="Link to this definition"></a></dt>
+<dd><section id="id56">
+<h2>Description<a class="headerlink" href="#id56" title="Link to this heading"></a></h2>
+<p>Load an audio from the specified path and return a Pygame sound object.
+Exits the program if the audio cannot be loaded.</p>
+</section>
+<section id="id57">
+<h2>Arguments<a class="headerlink" href="#id57" title="Link to this heading"></a></h2>
+<p>audio_path : The relative path to the audio file.
+use_canal: Decides whether we use pygame.mixer.sound or pygame.mixer.music to load audio</p>
+</section>
+<section id="id58">
+<h2>Returns<a class="headerlink" href="#id58" title="Link to this heading"></a></h2>
+<p>pygame.mixer.Sound: A Pygame sound object containing the loaded audio.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.load_image">
+<span class="sig-name descname"><span class="pre">load_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.load_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.load_image" title="Link to this definition"></a></dt>
+<dd><section id="id59">
+<h2>Description<a class="headerlink" href="#id59" title="Link to this heading"></a></h2>
+<p>Load an image from the specified path and return a Pygame surface with transparency.
+Exits the program if the image cannot be loaded.</p>
+</section>
+<section id="id60">
+<h2>Arguments<a class="headerlink" href="#id60" title="Link to this heading"></a></h2>
+<p>img_path : The relative path to the image file.</p>
+</section>
+<section id="id61">
+<h2>Returns<a class="headerlink" href="#id61" title="Link to this heading"></a></h2>
+<p>pygame.Surface: A Pygame surface object containing the loaded image with transparency.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.pretty_dict">
+<span class="sig-name descname"><span class="pre">pretty_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.pretty_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.pretty_dict" title="Link to this definition"></a></dt>
+<dd><section id="id62">
+<h2>Description<a class="headerlink" href="#id62" title="Link to this heading"></a></h2>
+<p>Return a formatted string representation of a nested dictionary, with indentation</p>
+</section>
+<section id="id63">
+<h2>Arguments<a class="headerlink" href="#id63" title="Link to this heading"></a></h2>
+<p>d : The dictionary to format.
+parent_key (optional): The key of the parent dictionary, used to add an end-of-key comment.</p>
+</section>
+<section id="id64">
+<h2>Returns<a class="headerlink" href="#id64" title="Link to this heading"></a></h2>
+<p>str: A formatted, indented string representing the nested dictionary.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.pretty_list">
+<span class="sig-name descname"><span class="pre">pretty_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">liste</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.pretty_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.pretty_list" title="Link to this definition"></a></dt>
+<dd><section id="id65">
+<h2>Description<a class="headerlink" href="#id65" title="Link to this heading"></a></h2>
+<p>Displays the contents of a list in a formatted and readable way.</p>
+<p>Each element is printed with an index label for clarity,
+enclosed between “BEGIN DISPLAYING” and “END DISPLAYING” markers.</p>
+</section>
+<section id="id66">
+<h2>Arguments<a class="headerlink" href="#id66" title="Link to this heading"></a></h2>
+<p>liste: The list to display.</p>
+</section>
+<section id="id67">
+<h2>Returns<a class="headerlink" href="#id67" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.remove_img_obj">
+<span class="sig-name descname"><span class="pre">remove_img_obj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainblock</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.remove_img_obj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.remove_img_obj" title="Link to this definition"></a></dt>
+<dd><section id="id68">
+<h2>Description<a class="headerlink" href="#id68" title="Link to this heading"></a></h2>
+<p>Removes an image object from a given chainblock by its tag.</p>
+<p>Searches through the chainblock for an object with the specified tag,
+removes it if found, and returns the updated chainblock along with
+the position of the removed object.</p>
+</section>
+<section id="id69">
+<h2>Arguments<a class="headerlink" href="#id69" title="Link to this heading"></a></h2>
+<p>tag: The tag identifying the image object to remove.
+chainblock: The list of objects currently in the chainblock.</p>
+</section>
+<section id="id70">
+<h2>Returns<a class="headerlink" href="#id70" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>tuple: (updated_chainblock, obj_pos)</dt><dd><ul class="simple">
+<li><p>updated_chainblock: The chainblock after removal.</p></li>
+<li><p>obj_pos: The position of the removed object, or (0, 0) if not found.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.remove_text_chainblock">
+<span class="sig-name descname"><span class="pre">remove_text_chainblock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chainblock</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.remove_text_chainblock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.remove_text_chainblock" title="Link to this definition"></a></dt>
+<dd><section id="id71">
+<h2>Description<a class="headerlink" href="#id71" title="Link to this heading"></a></h2>
+<p>Removes all text-related objects from the given chainblock.</p>
+<p>Iterates through the chainblock and removes any element 
+containing the key ‘text’.</p>
+</section>
+<section id="id72">
+<h2>Arguments<a class="headerlink" href="#id72" title="Link to this heading"></a></h2>
+<p>chainblock: List of scene objects.</p>
+</section>
+<section id="id73">
+<h2>Returns<a class="headerlink" href="#id73" title="Link to this heading"></a></h2>
+<p>list: The updated chainblock with text objects removed.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.scale_image_to_wind">
+<span class="sig-name descname"><span class="pre">scale_image_to_wind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.scale_image_to_wind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.scale_image_to_wind" title="Link to this definition"></a></dt>
+<dd><section id="id74">
+<h2>Description<a class="headerlink" href="#id74" title="Link to this heading"></a></h2>
+<p>Scale a Pygame image surface to fit the given window size.</p>
+</section>
+<section id="id75">
+<h2>Arguments<a class="headerlink" href="#id75" title="Link to this heading"></a></h2>
+<p>image : The image surface to scale.
+window_size : The target size (width, height) for scaling.</p>
+</section>
+<section id="id76">
+<h2>Returns<a class="headerlink" href="#id76" title="Link to this heading"></a></h2>
+<p>pygame.Surface: The scaled image surface.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.StateMachine.search_tag_chainblock">
+<span class="sig-name descname"><span class="pre">search_tag_chainblock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainblock</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#StateMachine.search_tag_chainblock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.StateMachine.search_tag_chainblock" title="Link to this definition"></a></dt>
+<dd><section id="id77">
+<h2>Description<a class="headerlink" href="#id77" title="Link to this heading"></a></h2>
+<p>Checks whether a given tag exists within the chainblock.</p>
+<p>Iterates through all objects and returns True if an object contains
+a ‘tag’ field that matches or includes the given tag.</p>
+</section>
+<section id="id78">
+<h2>Arguments<a class="headerlink" href="#id78" title="Link to this heading"></a></h2>
+<p>tag: The tag to search for.
+chainblock: List of objects representing the current scene state.</p>
+</section>
+<section id="id79">
+<h2>Returns<a class="headerlink" href="#id79" title="Link to this heading"></a></h2>
+<p>bool: True if the tag is found in any object, otherwise False.</p>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">visualnovel.</span></span><span class="sig-name descname"><span class="pre">VisualNovelGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">renpy_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug_PATH</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.output_result">
+<span class="sig-name descname"><span class="pre">output_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">debug_PATH</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.output_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.output_result" title="Link to this definition"></a></dt>
+<dd><section id="id80">
+<h2>Description<a class="headerlink" href="#id80" title="Link to this heading"></a></h2>
+<p>Writes the AST, symbols table, and labels table to text files for analysis.</p>
+<p>This function outputs the following files in the <cite>outputs_file</cite> directory:
+- <cite>output_ast.txt</cite>: The string representation of the AST.
+- <cite>symbols_table.txt</cite>: A formatted version of the symbols table.
+- <cite>labels_table.txt</cite>: A formatted version of the labels table.</p>
+</section>
+<section id="id81">
+<h2>Arguments<a class="headerlink" href="#id81" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id82">
+<h2>Returns<a class="headerlink" href="#id82" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.pretty_dict">
+<span class="sig-name descname"><span class="pre">pretty_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.pretty_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.pretty_dict" title="Link to this definition"></a></dt>
+<dd><section id="id83">
+<h2>Description<a class="headerlink" href="#id83" title="Link to this heading"></a></h2>
+<p>Formats and displays a nested dictionary with indentation and end-of-key markers.</p>
+<p>This function recursively formats a dictionary into a readable string, adding 
+indentation for nested dictionaries and appending ‘end of &lt;key&gt;’ after each 
+nested dictionary.</p>
+</section>
+<section id="id84">
+<h2>Arguments<a class="headerlink" href="#id84" title="Link to this heading"></a></h2>
+<p>d : The dictionary to format.
+parent_key : The key of the current level (used for the ‘end of’ marker).</p>
+</section>
+<section id="id85">
+<h2>Returns<a class="headerlink" href="#id85" title="Link to this heading"></a></h2>
+<p>str: A formatted string representing the dictionary with proper indentation and end markers.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.print_list_token">
+<span class="sig-name descname"><span class="pre">print_list_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.print_list_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.print_list_token" title="Link to this definition"></a></dt>
+<dd><p>Formats and displays a nested dictionary with indentation and end-of-key markers.</p>
+<p>This function recursively formats a dictionary into a readable string, adding 
+indentation for nested dictionaries and appending ‘end of &lt;key&gt;’ after each 
+nested dictionary.</p>
+<section id="id86">
+<h2>Arguments<a class="headerlink" href="#id86" title="Link to this heading"></a></h2>
+<p>d : The dictionary to format.
+parent_key : The key of the current level (used for the ‘end of’ marker).</p>
+</section>
+<section id="id87">
+<h2>Returns<a class="headerlink" href="#id87" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>str</dt><dd><p>A formatted string representing the dictionary with proper indentation and end markers.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.step1_loadfile">
+<span class="sig-name descname"><span class="pre">step1_loadfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">renpy_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.step1_loadfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.step1_loadfile" title="Link to this definition"></a></dt>
+<dd><section id="id88">
+<h2>Description<a class="headerlink" href="#id88" title="Link to this heading"></a></h2>
+<p>Loads the contents of a Ren’Py script file into memory.</p>
+<p>This function opens the specified Ren’Py script file, reads its contents, 
+and stores the content in the <cite>self.file</cite> attribute.</p>
+</section>
+<section id="id89">
+<h2>Arguments<a class="headerlink" href="#id89" title="Link to this heading"></a></h2>
+<p>renpy_file : The path to the Ren’Py script file to be loaded.</p>
+</section>
+<section id="id90">
+<h2>Returns<a class="headerlink" href="#id90" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.step2_tokenizer">
+<span class="sig-name descname"><span class="pre">step2_tokenizer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.step2_tokenizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.step2_tokenizer" title="Link to this definition"></a></dt>
+<dd><section id="id91">
+<h2>Description<a class="headerlink" href="#id91" title="Link to this heading"></a></h2>
+<p>Tokenizes the loaded Ren’Py script and stores the tokens found in a list.</p>
+<p>This function uses the <cite>RPTokenizer</cite> to tokenize the contents of the loaded 
+Ren’Py script file, storing the tokens in <cite>self.list_tokens</cite>. The tokenization 
+process continues until the end of the file is reached.</p>
+<p>If debugging is enabled, it prints all the tokens found.</p>
+</section>
+<section id="id92">
+<h2>Arguments<a class="headerlink" href="#id92" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id93">
+<h2>Returns<a class="headerlink" href="#id93" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.step3_parser">
+<span class="sig-name descname"><span class="pre">step3_parser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.step3_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.step3_parser" title="Link to this definition"></a></dt>
+<dd><section id="id94">
+<h2>Description<a class="headerlink" href="#id94" title="Link to this heading"></a></h2>
+<p>Parses the tokenized Ren’Py script into an Abstract Syntax Tree (AST).</p>
+<p>This function uses the <cite>MasterParser</cite> to parse the list of tokens and 
+generates an AST representing the structure of the Ren’Py script. The resulting 
+AST is stored in <cite>self.ast_tree</cite>.</p>
+</section>
+<section id="id95">
+<h2>Arguments<a class="headerlink" href="#id95" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id96">
+<h2>Returns<a class="headerlink" href="#id96" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.step4_initialize_master_node">
+<span class="sig-name descname"><span class="pre">step4_initialize_master_node</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.step4_initialize_master_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.step4_initialize_master_node" title="Link to this definition"></a></dt>
+<dd><section id="id97">
+<h2>Description<a class="headerlink" href="#id97" title="Link to this heading"></a></h2>
+<p>Initializes the master node by processing the AST tree and storing the corresponding statements in the symbol table.</p>
+<p>This function performs the following tasks:</p>
+<ul class="simple">
+<li><p>Iterates through the AST tree to process various types of nodes (<cite>DefineNode</cite>, <cite>ImageNode</cite>, <cite>SceneNode</cite>, <cite>ShowNode</cite>, <cite>HideNode</cite>,</p></li>
+</ul>
+<p><cite>PlayNode</cite>, <cite>StopNode</cite>, <cite>LabelNode</cite>).
+- For each node, it verifies prior declarations using the <cite>verify_prior_declaration</cite> method to ensure that any referenced tags, 
+variables, or functions have been declared before use.
+- Adds each processed node to the relevant section of the <cite>symbols_table</cite>:
+- <cite>DefineNode</cite>: Stores the variable or function definition.
+- <cite>ImageNode</cite>: Stores image expressions.
+- <cite>SceneNode</cite>, <cite>ShowNode</cite>, <cite>HideNode</cite>: Stores scene-related data, including transformation, layer, and transition attributes.
+- <cite>PlayNode</cite>, <cite>StopNode</cite>: Stores play and stop instructions.
+- <cite>LabelNode</cite>: Processes labels and delegates further initialization to the <cite>step4_label_body_initialize</cite> method for label body processing.</p>
+</section>
+<section id="id98">
+<h2>Arguments:<a class="headerlink" href="#id98" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id99">
+<h2>Returns<a class="headerlink" href="#id99" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.step4_label_body_initialize">
+<span class="sig-name descname"><span class="pre">step4_label_body_initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ast_label_body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="AST.html#AST.LabelNode" title="AST.LabelNode"><span class="pre">LabelNode</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.step4_label_body_initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.step4_label_body_initialize" title="Link to this definition"></a></dt>
+<dd><section id="id100">
+<h2>Description<a class="headerlink" href="#id100" title="Link to this heading"></a></h2>
+<p>Initializes the body of a label, verifying and organizing various AST nodes into their respective categories 
+(e.g., ‘scene’, ‘show’, ‘hide’, ‘play’, ‘dialogue’, etc.) within the <cite>labels_table</cite> for further processing.</p>
+<p>This function performs the following tasks:</p>
+<ul class="simple">
+<li><p>Ensures that the label name has not been used previously in the <cite>labels_table</cite>.</p></li>
+<li><p>Iterates through the AST nodes associated with the label body, verifying prior declarations for each node.</p></li>
+<li><p>Categorizes and stores nodes like <cite>SceneNode</cite>, <cite>ShowNode</cite>, <cite>HideNode</cite>, <cite>PlayNode</cite>, <cite>StopNode</cite>, <cite>TransitionNode</cite>,</p></li>
+</ul>
+<p><cite>ReturnNode</cite>, <cite>JumpNode</cite>, <cite>DialogueNode</cite>, and <cite>StringNode</cite> into their corresponding sections in the label’s body.
+- Each section (e.g., ‘scene’, ‘show’, ‘hide’) is populated with a list of relevant AST nodes, and the proper arguments 
+(such as transform, layer, transition) are extracted and stored.
+- Ensures that the <cite>with</cite> statement, if present, is placed correctly, as it must follow certain other node types 
+(such as <cite>scene</cite>, <cite>show</cite>, or <cite>hide</cite>).</p>
+</section>
+<section id="id101">
+<h2>Arguments:<a class="headerlink" href="#id101" title="Link to this heading"></a></h2>
+<p>ast_label_body: The AST node representing the label body to be initialized.</p>
+</section>
+<section id="id102">
+<h2>Returns<a class="headerlink" href="#id102" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.step5_runtime">
+<span class="sig-name descname"><span class="pre">step5_runtime</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.step5_runtime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.step5_runtime" title="Link to this definition"></a></dt>
+<dd><section id="id103">
+<h2>Description<a class="headerlink" href="#id103" title="Link to this heading"></a></h2>
+<p>Runs the visual novel by initializing the state machine and generating the game.</p>
+<p>This function performs the following tasks:
+- Initializes a <cite>StateMachine</cite> using the current <cite>symbols_table</cite>, <cite>labels_table</cite>, <cite>ast_tree</cite>, and the path to the Ren’Py file.
+- Calls the <cite>generate_VN</cite> method of the <cite>StateMachine</cite> to start the execution of the visual novel.
+- The <cite>generate_VN</cite> method is responsible for processing and rendering the visual novel, including the handling of debug mode if enabled.</p>
+</section>
+<section id="id104">
+<h2>Arguments:<a class="headerlink" href="#id104" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="id105">
+<h2>Returns<a class="headerlink" href="#id105" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.update_nested_table">
+<span class="sig-name descname"><span class="pre">update_nested_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ast_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.update_nested_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.update_nested_table" title="Link to this definition"></a></dt>
+<dd><section id="id106">
+<h2>Description<a class="headerlink" href="#id106" title="Link to this heading"></a></h2>
+<p>Updates a nested table with arguments from an AST node.</p>
+<p>This function navigates through the <cite>table</cite> (a nested dictionary) using the tags 
+from the <cite>ast_node.image_expression</cite>, and adds or updates the arguments for the 
+final tag. If a tag already exists, the arguments are updated without overwriting 
+any existing data at higher levels in the nested structure.</p>
+<p>The difference with update_nested_table_image_node is the type of information 
+we want to store at the end of the nested dictionnary.</p>
+</section>
+<section id="id107">
+<h2>Arguments<a class="headerlink" href="#id107" title="Link to this heading"></a></h2>
+<p>table : The nested dictionary to update with the arguments.
+ast_node : The AST node containing the image expression and associated data.
+args : A dictionary of arguments to be stored in the nested table.</p>
+</section>
+<section id="id108">
+<h2>Returns<a class="headerlink" href="#id108" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.update_nested_table_image_node">
+<span class="sig-name descname"><span class="pre">update_nested_table_image_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ast_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="AST.html#AST.ImageNode" title="AST.ImageNode"><span class="pre">ImageNode</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.update_nested_table_image_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.update_nested_table_image_node" title="Link to this definition"></a></dt>
+<dd><section id="id109">
+<h2>Description<a class="headerlink" href="#id109" title="Link to this heading"></a></h2>
+<p>Updates a nested table with the image path from an ImageNode.</p>
+<p>This function navigates through the <cite>table</cite> (a nested dictionary) using the tags 
+from the <cite>ast_node.image_expression</cite>, and adds or updates the image path for 
+the final tag. If a tag already exists, the image path is updated without overwriting 
+any existing data at higher levels in the nested structure.</p>
+</section>
+<section id="id110">
+<h2>Arguments<a class="headerlink" href="#id110" title="Link to this heading"></a></h2>
+<p>table : The nested dictionary to update with the image path.
+ast_node : The AST node containing the image expression and image path.
+img_path : The path of the image to store in the nested table.</p>
+</section>
+<section id="id111">
+<h2>Returns<a class="headerlink" href="#id111" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="visualnovel.VisualNovelGenerator.verify_prior_declaration">
+<span class="sig-name descname"><span class="pre">verify_prior_declaration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ast_node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/visualnovel.html#VisualNovelGenerator.verify_prior_declaration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualnovel.VisualNovelGenerator.verify_prior_declaration" title="Link to this definition"></a></dt>
+<dd><section id="id112">
+<h2>Description<a class="headerlink" href="#id112" title="Link to this heading"></a></h2>
+<p>Verifies that all variables used in the given AST node are declared beforehand.</p>
+<p>This function verifies that all variables, image tags, and functions used in the provided AST node 
+have been declared beforehand. It checks the following types of nodes:</p>
+<ul class="simple">
+<li><p><cite>DefineNode</cite>: Ensures that any variables or functions defined within the node are previously declared in the symbol table.</p></li>
+<li><p><cite>SceneNode</cite>, <cite>ShowNode</cite>, and <cite>HideNode</cite>: Verifies that any tags (such as image tags) used in these nodes exist in the symbol table.</p></li>
+<li><p><cite>TransitionNode</cite>: Checks that the transition variable, if used, is declared.</p></li>
+<li><p><cite>ReturnNode</cite>: Verifies that any variable or function returned in the node is declared.</p></li>
+<li><p><cite>JumpNode</cite>: Ensures that the label being jumped to exists.</p></li>
+<li><p><cite>DialogueNode</cite>: Verifies that the speaker or any variables used in the dialogue have been declared.</p></li>
+</ul>
+<p>If any tag, variable, or function is used before being declared, a runtime error is raised, 
+indicating that the user who wrote the script made a mistake.</p>
+</section>
+<section id="id113">
+<h2>Arguments<a class="headerlink" href="#id113" title="Link to this heading"></a></h2>
+<p>ast_node : The AST node to verify, which can be a <cite>DefineNode</cite>, <cite>SceneNode</cite>, <cite>HideNode</cite>, or <cite>ShowNode</cite>.</p>
+</section>
+<section id="id114">
+<h2>Returns<a class="headerlink" href="#id114" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="defs.html" class="btn btn-neutral float-left" title="defs module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David J.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
