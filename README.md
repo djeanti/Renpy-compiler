@@ -1,6 +1,6 @@
 # Renpy-Compiler
 
-**Status:** Ongoing (Work in progress)
+**Status:** Finished
 
 Renpy-Compiler is an ongoing project that implements a complete **AST(1) construction and semantic analysis** pipeline for a Ren’Py-inspired scripting language (RnP). The compiler parses `.rpy`-style scripts and generates an abstract syntax tree (AST) that can be used by a runtime engine to execute and render visual novels.
 
