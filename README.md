@@ -26,6 +26,9 @@ Renpy-Compiler is a project that implements a complete **AST(1) construction and
 - Supports nodes such as `DefineNode`, `ImageNode`, `SceneNode`, `ShowNode`, `PlayNode`, `StringNode`, `LabelNode`, `ReturnNode`, `StopNode`, etc.
 - Tracks variable declarations, symbol usage, and context for semantic analysis.
 
+### 4. Visual novel generation
+- Generate a playable narrative video game (also called a 'visual novel') that includes sounds (voice for each character and background music), transitions for the characters image and the backgrounds.
+
 ---
 ## Usage / Installation
 
