@@ -26,7 +26,7 @@ Renpy-Compiler is a project that implements a complete **AST(1) construction and
 - Supports nodes such as `DefineNode`, `ImageNode`, `SceneNode`, `ShowNode`, `PlayNode`, `StringNode`, `LabelNode`, `ReturnNode`, `StopNode`, etc.
 - Tracks variable declarations, symbol usage, and context for semantic analysis.
 
-### 4. Visual novel generation
+### 4. Visual novel generation with a custom-made runtime engine in Python
 - Generate a playable narrative video game (also called a 'visual novel') that includes sounds (voice for each character and background music), transitions for the characters image and the backgrounds.
 
 ---
@@ -38,16 +38,4 @@ Please refer to the following documents to use this project:
 - INSTALL.MD : To install the required dependencies
 - Read the comments at the top of the file Test.py and modify as needed to test the desired parser method.
   
-## Project Status
-
-This project is **ongoing**. Current implementation includes:
-
-- Full AST construction from Ren’Py-style files.
-- Semantic checks for variable usage and statement validity.
-- Support for basic statement execution flow within labels.
-
-Future plans:
-
-- Creation of the 'runtime engine' which will execute and create a visual novel video game from the complete AST object.
-
 ---
