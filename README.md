@@ -21,7 +21,7 @@ Renpy-Compiler is a project that implements a complete **AST(1) construction and
 - Recognizes statements like `define`, `image`, `scene`, `show`, `play`, `stop`, `label`, `return`, and more.
 - Handles top-level statements and separates label bodies for sequential execution.
 
-### 3. AST Building (in the `parser` module)
+### 3. AST Building
 - Constructs a fully structured Abstract Syntax Tree (AST) representing the script.
 - Supports nodes such as `DefineNode`, `ImageNode`, `SceneNode`, `ShowNode`, `PlayNode`, `StringNode`, `LabelNode`, `ReturnNode`, `StopNode`, etc.
 - Tracks variable declarations, symbol usage, and context for semantic analysis.
